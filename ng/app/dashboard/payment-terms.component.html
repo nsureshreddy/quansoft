@@ -1,0 +1,12 @@
+<mat-card class="payment-terms">
+  <form (ngSubmit)="updatePaymentTerms()" #termsForm="ngForm">
+    <mat-form-field *ngFor="let term of terms; let i=index">
+      <input matInput type="text" placeholder="Activity Name" name="activity" [(ngModel)]="terms[i].description">
+    </mat-form-field>
+
+    <div class="text-right">
+        <button type="button" mat-raised-button color="primary" (click)="addActivity()">Add Activity</button>
+        <button type="submit" mat-raised-button color="primary">Save & Continue</button>
+    </div>
+  </form>
+</mat-card>

@@ -1,0 +1,171 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.spinner {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	margin: -75px 0 0 -75px;
+	border: 5px solid #eee;
+	border-radius: 50%;
+	border-top: 5px solid #3498db;
+	width: 150px;
+	height: 150px;
+	-webkit-animation: spin 1s linear infinite;
+	animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto';
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+.bold {
+  font-weight: bold;
+}
+
+.material-icons.link {
+  cursor: pointer;
+}
+.material-icons.link:hover {
+  outline: none;
+}
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.p-l-1 {
+  padding-left: .5rem;
+}
+
+.p-l-2 {
+  padding-left: 1rem;
+}
+
+.n-m-t {
+  margin-top: 0;
+}
+
+.clear-fix::after {
+  clear: both;
+}
+
+li {
+  list-style-type: none;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.m-t {
+  margin-top: 1rem;
+}
+
+.error {
+  color: #cc0000;
+  font-size: .875rem;
+}
+.padding {
+  padding: 1rem;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: .875rem;
+  font-size: 15px;
+}
+._500 {
+  font-weight: 500;
+}
+.text-muted {
+  opacity: .6;
+}
+.row {
+  margin-bottom: .75rem;
+}
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.row [class*=col-] {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.col-12 {
+  width: 100%;
+  float: left;
+}
+.col-4 {
+  width: 33%;
+  float: left;
+}
+.col-3 {
+  width: 25%;
+  float: left;
+}
+.col-2 {
+  width: 16.66%;
+  float: left;
+}
+.t-d-u {
+  text-decoration: underline;
+}
+.d-i-b {
+  display: inline-block;
+}
+.mat-step-label {
+  font-size: 16px;
+}
+.mat-step-label.mat-step-label-active.mat-step-label-selected {
+  color: steelblue;
+}
+.mat-step-label-active {
+  color: steelblue;
+}
+.mat-step-icon {
+  background-color: steelblue!important;
+}

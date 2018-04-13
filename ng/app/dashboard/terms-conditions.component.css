@@ -1,0 +1,21 @@
+.terms-conditions {
+    padding: 0!important;
+}
+
+@media only screen and (min-width:901px) {
+    .terms-conditions .mat-form-field {
+        width: 60%;
+    }
+}
+
+
+@media only screen and (max-width:900px) {
+    .terms-conditions .mat-form-field {
+        width: 100%;
+    }
+}
+
+.terms-conditions .mat-input-wrapper {
+  padding-bottom: .875rem!important;
+  font-size: 14px;
+}

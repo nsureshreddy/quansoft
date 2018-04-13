@@ -1,0 +1,19 @@
+<mat-card>
+  <div class="proposal-form mat-elevation-z8">
+    <h3 class="header">Proposal Details</h3>
+    <mat-horizontal-stepper  #stepper="matHorizontalStepper">
+      <mat-step [stepControl]="priceSchedule">
+        <ng-template matStepLabel>Price Schedule</ng-template>
+        <price-schedule [project]="project" [stepper]="stepper"></price-schedule>
+      </mat-step>
+      <mat-step [stepControl]="paymentTerms">
+        <ng-template matStepLabel>Payment Terms</ng-template>
+        <app-payment-terms [stepper]="stepper"></app-payment-terms>
+      </mat-step>
+      <mat-step [stepControl]="Terms">
+        <ng-template matStepLabel>Terms & Conditions</ng-template>
+        <app-terms-conditions [project]="project"></app-terms-conditions>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</mat-card>

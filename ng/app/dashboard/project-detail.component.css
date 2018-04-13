@@ -1,0 +1,49 @@
+.row .col-12 div,
+.row .col-4 div,
+.row .col-3 div,
+.row .col-2 div  {
+  font-size: 14px;
+}
+.terms-detail .text-muted {
+  text-transform: capitalize;
+}
+.proposal-detail .scope-item {
+  padding-left: .75rem;
+}
+h3 {
+  margin: 16px 12px;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.download-as-pdf {
+  position: absolute;
+  top: 36px;
+  right: 36px;
+  cursor: pointer;
+}
+
+.proposal-doc {
+  background-color: #fff;
+  text-align: left;
+  padding: 16px 100px;
+}
+.proposal-doc h3 {
+  text-transform: uppercase;
+  color: rgb(33,88,104);
+  margin-left: 0;
+}
+.proposal-doc .doc-header {
+  color: rgb(152,72,6);
+  font-size: 20px;
+}
+.proposal-text {
+  padding-top: 100px;
+  color: rgb(33,88,104);
+  font-size: 24px;
+}
+
+.doc-footer {
+  color: rgb(152,72,6);
+  font-size: 16px;
+}

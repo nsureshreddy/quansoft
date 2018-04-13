@@ -1,0 +1,31 @@
+<mat-card class="terms-conditions">
+  <form (ngSubmit)="updateTerms(termsForm)" #termsForm="ngForm">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Duration" name="duration" [(ngModel)]="terms.duration">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Penalty" name="penalty" [(ngModel)]="terms.penalty">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Bonus Clause" name="bonusClause" [(ngModel)]="terms.bonusClause">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Staff Deployment" name="staffDeployment" [(ngModel)]="terms.staffDeployment">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Payments Terms" name="paymentsTerms" [(ngModel)]="terms.paymentsTerms">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Account Details" name="accountDetails" [(ngModel)]="terms.accountDetails">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Termination" name="termination" [(ngModel)]="terms.termination">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Arbitration" name="arbitration" [(ngModel)]="terms.arbitration">
+    </mat-form-field>
+    <div>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+    </div>
+  </form>
+</mat-card>

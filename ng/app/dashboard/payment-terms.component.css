@@ -1,0 +1,7 @@
+.payment-terms {
+  padding: 0!important;
+}
+
+.payment-terms mat-form-field {
+  width: 100%;
+}
