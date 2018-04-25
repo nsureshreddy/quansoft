@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>
+  New Master Schedule
+  <button class="pull-right" mat-button [mat-dialog-close]>
+    <i class="material-icons">clear</i>
+  </button>
+</h1>
+<div mat-dialog-content>
+  <form class="new-master-schedule">
+    <mat-form-field>
+      <input matInput placeholder="Code" name="code" [(ngModel)]="schedule.code">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Description" name="description" [(ngModel)]="schedule.description">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Cost Code" name="costCode" [(ngModel)]="schedule.costCode">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Cost Centre" name="costCentre" [(ngModel)]="schedule.costCentre">
+    </mat-form-field>
+    <div class="activities" *ngFor="let activity of schedule.activities;let index=index">
+      <mat-form-field class="input">
+        <input matInput placeholder="Activity Code" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.code">
+      </mat-form-field>
+      <mat-form-field class="input">
+        <input matInput placeholder="UOM" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.uom">
+      </mat-form-field>
+      <mat-form-field class="textarea">
+          <textarea matInput placeholder="Activity Short Description" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.shortDescription"></textarea>
+        </mat-form-field>
+        <mat-form-field class="textarea">
+            <textarea matInput placeholder="Activity Description" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.description"></textarea>
+        </mat-form-field>
+    </div>
+    <a class="add-activity" (click)="addActivity()">Add Activity</a>
+  </form>
+<!--
+  <input type="file" (change)="onFileChange($event)" multiple="false" />
+  
+  <table class="sjs-table">
+    <tr *ngFor="let row of data">
+      <td *ngFor="let val of row">
+        {{val}}
+      </td>
+    </tr>
+  </table>
+-->
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</div>
