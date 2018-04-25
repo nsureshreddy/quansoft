@@ -30,3 +30,14 @@
 		transform: rotate(360deg);
 	}
 }
+
+.mat-dialog-content {
+	max-height: initial!important;
+}
+
+._700 {
+	font-weight: 700;
+}
+.font-sm {
+	font-size: 16px;
+}

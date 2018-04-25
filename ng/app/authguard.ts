@@ -6,12 +6,11 @@ export class AlwaysAuthGuard implements CanActivate {
     constructor(private router: Router) {}
     user: string;
     canActivate() {
-      this.user = localStorage.getItem('user');
+      this.user = localStorage.user;
       if (this.user) {
         return true;
       }
-      
-      this.router.navigate(['login']);
+      this.router.navigate(['user']);
       return false;
     }
   }

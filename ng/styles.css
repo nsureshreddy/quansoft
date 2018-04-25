@@ -54,6 +54,11 @@ h1, h2, h3, h4, h5, h6 {
 .material-icons.link {
   cursor: pointer;
 }
+.material-icons.menu-link {
+  vertical-align: middle;
+	line-height: 19px;
+}
+
 .material-icons.link:hover {
   outline: none;
 }
@@ -120,6 +125,9 @@ li {
 ._500 {
   font-weight: 500;
 }
+._600 {
+  font-weight: 600;
+}
 .text-muted {
   opacity: .6;
 }
@@ -141,6 +149,14 @@ li {
 }
 .col-4 {
   width: 33%;
+  float: left;
+}
+.col-6 {
+  width: 50%;
+  float: left;
+}
+.col-8 {
+  width: 66.6%;
   float: left;
 }
 .col-3 {
@@ -168,4 +184,21 @@ li {
 }
 .mat-step-icon {
   background-color: steelblue!important;
+}
+.rate-input-dialog .mat-dialog-container {
+  padding: 0;
+}
+.rate-input-dialog {
+  height: 80vh;
+}
+.quantity-input-dialog .mat-dialog-container {
+  padding: 0;
+}
+.quantity-input-dialog {
+  height: 80vh;
+  width: 75vw;
+}
+
+.quantity-input {
+  padding: 16px;
 }

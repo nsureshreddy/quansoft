@@ -5,6 +5,7 @@ import { ScopeItem } from './app-models/scopeItem';
 import { Project } from './app-models/project';
 import { TermsAndConditions } from './app-models/termsAndConditions';
 import { PaymentTerm } from './app-models/paymentTerms';
+import { MasterSchedule } from './app-models/masterSchedule';
 
 @Injectable()
 export class ProposalService {
@@ -33,6 +34,21 @@ export class ProposalService {
 
   updateProjectTerms(terms: TermsAndConditions, jobId: number) {
     return this.http.post('/api/project/update-terms/' + jobId, terms);
+  }
+  
+  getMasterSchedules() {
+    return this.http.get('/api/master-schedule');
+  }
+
+  saveMasterSchedule(schedule: MasterSchedule) {
+    if (schedule._id) {
+      return this.http.put('/api/master-schedule', schedule);  
+    }
+    return this.http.post('/api/master-schedule', schedule);
+  }
+
+  deleteMasterSchedule(id) {
+    return this.http.delete('/api/master-schedule/' + id);
   }
 
   getAllUsers() {

@@ -25,7 +25,8 @@ import {
   MatSnackBarModule,
   MatChipsModule,
   MatIconModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatSliderModule
 } from '@angular/material';
 
 @NgModule({
@@ -54,7 +55,8 @@ import {
     MatSnackBarModule,
     MatChipsModule,
     MatIconModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSliderModule
   ]
 })
 

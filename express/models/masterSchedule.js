@@ -2,20 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var masterScheduleActivitySchema = Schema({
-  activityCode: {
+  code: {
     type: String
   },
-  activityDescription: {
+  description: {
     type: String
   },
-  activityShortDescription:  {
+  shortDescription:  {
     type: String
   },
   uom: {
     type: String
-  },
-  quantity: {
-    type: Number
   }
 });
 

@@ -1,7 +1,6 @@
 <mat-card>
   <div [hidden]="!projectsDataSource.data.length" class="project-list mat-elevation-z8">
 
-
     <h3 class="header">Project List</h3>
 
     <mat-table #table [dataSource]="projectsDataSource">
@@ -42,9 +41,26 @@
       <ng-container matColumnDef="jobId">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element" class="project-actions">
-          <i matTooltip="Add Proposal" routerLink="../proposal/{{element.jobId}}" class="material-icons link">library_add</i>
-          <i matTooltip="View Proposal" routerLink="../proposal-detail/{{element.jobId}}" class="material-icons link">insert_drive_file</i>
-          <i matTooltip="Assign Users" routerLink="../proposal/{{element.jobId}}/assign-users" class="material-icons link">assignment_ind</i>
+          <i class="material-icons link" [matMenuTriggerFor]="menu">more_vert</i>
+
+          <mat-menu class="more-vert-menu" #menu="matMenu">
+              <button routerLink="../proposal/{{element.jobId}}" mat-menu-item>
+                <i class="material-icons menu-link">library_add</i>
+                Add/Edit Proposal
+              </button>
+              <button routerLink="../proposal-detail/{{element.jobId}}" mat-menu-item>
+                  <i class="material-icons menu-link">insert_drive_file</i>
+                  View Proposal
+              </button>
+              <button routerLink="../proposal/{{element.jobId}}/assign-users" mat-menu-item>
+                  <i class="material-icons menu-link">assignment_ind</i>
+                  Assign Users
+              </button>
+              <button routerLink="../proposal/{{element.jobId}}/cost-estimates" mat-menu-item>
+                  <i class="material-icons menu-link">monetization_on</i>
+                  <span>Cost Estimates</span>
+              </button>
+          </mat-menu>
         </mat-cell>
       </ng-container>
 

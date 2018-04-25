@@ -1,9 +1,7 @@
-<mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue" *ngIf="currentBool">
-</mat-progress-bar>
 <mat-drawer-container autosize>
   <mat-drawer #drawer opened="true" mode="side">
     <div class="brand">
-      <a routerLink="../dashboard/projects">
+      <a routerLink="../dashboard/proposals">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24" height="24">
           <path d="M 4 4 L 44 4 L 44 44 Z" fill="#F5F5F5"></path>
           <path d="M 4 4 L 34 4 L 24 24 Z" fill="rgba(0,0,0,0.15)"></path>
@@ -12,27 +10,27 @@
       </a>
     </div>
     <nav class="left-nav">
-      <ul>
-        <li class="active">
-          <i class="material-icons">dashboard</i>
-          <span>Dashboard</span>
-        </li>
-        <li>
-          <i class="material-icons">book</i>
-          <span>Masters</span>
-        </li>
-        <li>
-          <i class="material-icons">settings</i>
-          <span>Settings</span>
-        </li>
-        <li>
-          <i routerLink="../dashboard/drawings" class="material-icons">photo_album</i>
-          <span>Drawings</span>
-        </li>        
-      </ul>
-    </nav>
+        <ul>
+          <li class="active">
+            <a routerLink="../dashboard">
+                <i class="material-icons">dashboard</i>
+                <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="../masters">
+              <i class="material-icons">book</i>
+              <span>Masters</span>
+            </a>
+          </li>
+          <li>
+            <i class="material-icons">settings</i>
+            <span>Settings</span>
+          </li>
+          
+        </ul>
+      </nav>
   </mat-drawer>
-  
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <p class="brand-name p-l-1">QUANSOFT</p>
@@ -67,7 +65,5 @@
       </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
-    
   <router-outlet></router-outlet>
-
 </mat-drawer-container>

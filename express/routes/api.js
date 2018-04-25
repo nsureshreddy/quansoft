@@ -133,31 +133,47 @@ router.post('/project/update-proposal/:jobId', function(req, res) {
   });
 });
 
-router.post('/master-schedule', function(req, res) {
+
+router.get('/master-schedule', (req, res) => {
+  MasterSchedule.find({}, (err, masters) => {
+    return res.json({ error: err, data: masters });
+  });
+});
+
+router.post('/master-schedule', (req, res) => {
   var masterSchedule = Object.assign(new MasterSchedule, req.body);
-  masterSchedule.save(function(err) {
-    if (err) {
-      return res.json({success: false, msg: err});
-    }
-    res.json({success: true, msg: 'Successful created new master schedule.'});
+  masterSchedule.save((err, master) => {
+    res.json({ error: err, data: master });
+  });
+});
+
+router.put('/master-schedule', (req, res) => {
+  var masterSchedule = Object.assign(new MasterSchedule, req.body);
+  MasterSchedule.update({ _id: masterSchedule._id }, masterSchedule, { upsert: true}, (err, master) => {
+    res.json({ error: err, data: masterSchedule });
+  });
+});
+
+router.delete('/master-schedule/:_id', (req, res) => {
+  MasterSchedule.findByIdAndRemove(req.params._id, (err, response) => {
+    return res.json({ error: err, data: response });
   });
 });
 
 // Save New proposal
 router.post('/proposal', function(req, res) {
-    var newProposal = new Proposal({
-      builder: req.body.builder,
-      amount: req.body.amount,
-      scope: req.body.scope,
-      amount: req.body.amount,
-      status: 'PENDING'
-    });
-    // save the user
-    newProposal.save(function(err) {
-      res.json({msg: 'Successful created new user.'});
-    });
+  var newProposal = new Proposal({
+    builder: req.body.builder,
+    amount: req.body.amount,
+    scope: req.body.scope,
+    amount: req.body.amount,
+    status: 'PENDING'
+  });
+  // save the user
+  newProposal.save(function(err) {
+    res.json({msg: 'Successful created new user.'});
+  });
 });
-
 
 
 module.exports = router;
