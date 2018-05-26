@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Quantity Input</span>
+    <span class="flex-spacer"></span>
+    <button mat-icon-button [mat-dialog-close]>
+      <i class="material-icons">clear</i>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="m-t">
+  <input (change)="onFileChange($event)" id="input-file-id" type="file" />
+  <label for="input-file-id" class="mat-raised-button mat-primary">Upload File</label>
+</div>
+<div class="m-t" id="hot"></div>

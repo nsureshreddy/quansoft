@@ -1,0 +1,55 @@
+<div class="login-card text-center">
+  <div class="form-wrapper">
+    <img src="http://quansys.in/images/logo.png" class="m-b">
+    <div *ngIf="!showSignup && !thankNote">
+      <form (ngSubmit)="signin(signinForm)" #signinForm="ngForm">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Username" name="userId" [(ngModel)]="user.userId" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required>
+        </mat-form-field>
+        <p class="error text-left" *ngIf="loginError">Couldn't find your account.</p>
+        <button class="signin-button" type="submit" mat-raised-button color="primary">Signin</button>
+      </form>
+      <p>
+        <a href="#" class="forgot-pass">Forgot Password?</a>
+      </p>
+      <div>
+        Don't have an account?
+        <a (click)="showSignup=true" class="mat-button text-primary _600">Sign up</a>
+      </div>
+    </div>
+    <div *ngIf="showSignup && !thankNote">
+      <form (ngSubmit)="signupForm.valid && signup(signupForm)" #signupForm="ngForm">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Full Name" name="userId" [(ngModel)]="user.name" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" name="userId" [(ngModel)]="user.email" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Organization Name" name="organization" [(ngModel)]="user.organization" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required>
+        </mat-form-field>
+        <button class="signin-button" type="submit" mat-raised-button color="primary">Signup</button>
+      </form>    
+      <div>
+        <p>
+          Already have an account?
+          <a (click)="showSignup=false" class="mat-button text-primary _600">Sign in</a>
+        </p>
+      </div>
+    </div>
+    <div *ngIf="thankNote" class='thank-note text-left'>
+        <h1>Thank You!</h1>
+        <p>
+          <strong>Please check your email</strong> for further instructions on how to complete your account setup.</p>
+        <hr>
+        <p>Having trouble? <a href="">Contact us</a></p>
+        <p><a>Continue to homepage</a></p>
+      </div>
+  </div>
+</div>

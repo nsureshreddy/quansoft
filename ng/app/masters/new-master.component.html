@@ -1,51 +1,67 @@
-<h1 mat-dialog-title>
-  New Master Schedule
-  <button class="pull-right" mat-button [mat-dialog-close]>
-    <i class="material-icons">clear</i>
-  </button>
-</h1>
-<div mat-dialog-content>
-  <form class="new-master-schedule">
-    <mat-form-field>
-      <input matInput placeholder="Code" name="code" [(ngModel)]="schedule.code">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Description" name="description" [(ngModel)]="schedule.description">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Cost Code" name="costCode" [(ngModel)]="schedule.costCode">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Cost Centre" name="costCentre" [(ngModel)]="schedule.costCentre">
-    </mat-form-field>
-    <div class="activities" *ngFor="let activity of schedule.activities;let index=index">
-      <mat-form-field class="input">
-        <input matInput placeholder="Activity Code" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.code">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>New Master Schedule</span>
+    <span class="flex-spacer"></span>
+    <button class="pull-right" mat-button [mat-dialog-close]>
+      <i class="material-icons">clear</i>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<form class="new-master-schedule padding bootstrap-wrapper">
+  
+  <mat-form-field class="col-sm-3">
+    <input matInput placeholder="Package Code" name="code" [(ngModel)]="schedule.code">
+  </mat-form-field>
+  <mat-form-field class="col-sm-8">
+    <textarea matInput placeholder="Package Description" name="description" [(ngModel)]="schedule.description"></textarea>
+  </mat-form-field>
+  
+  <mat-card *ngFor="let bill of schedule.bills;let index=index;" class="m-b">
+    <mat-card-header>
+      <mat-card-title class="_600">Bill: {{bill.costCode}}</mat-card-title>
+      <div class="flex-spacer"></div>
+      <div class="pull-right">
+        <mat-icon class="link" matTooltip="Delete Bill" (click)="removeBill(index)">delete</mat-icon>
+        <mat-icon class="link" matTooltip="Add New Activity" (click)="addActivity(bill)">add</mat-icon>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="col-sm-3">
+        <input matInput placeholder="Cost Code" [ngModelOptions]="{standalone: true}" [(ngModel)]="bill.costCode">
       </mat-form-field>
-      <mat-form-field class="input">
-        <input matInput placeholder="UOM" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.uom">
+      <mat-form-field class="col-sm-8">
+        <input matInput placeholder="Cost Centre" [ngModelOptions]="{standalone: true}" [(ngModel)]="bill.costCentre">
       </mat-form-field>
-      <mat-form-field class="textarea">
+      <div class="activities" *ngFor="let activity of bill.activities; let idx=index;">
+        <mat-form-field class="col-sm-1">
+          <input matInput placeholder="Activity Code" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.code">
+        </mat-form-field>
+        <mat-form-field class="col-sm-3">
           <textarea matInput placeholder="Activity Short Description" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.shortDescription"></textarea>
         </mat-form-field>
-        <mat-form-field class="textarea">
-            <textarea matInput placeholder="Activity Description" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.description"></textarea>
+        <mat-form-field class="col-sm-4">
+          <textarea matInput placeholder="Activity Description" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.description"></textarea>
         </mat-form-field>
-    </div>
-    <a class="add-activity" (click)="addActivity()">Add Activity</a>
-  </form>
-<!--
-  <input type="file" (change)="onFileChange($event)" multiple="false" />
+        <mat-form-field class="col-sm-1">
+          <input matInput placeholder="UOM" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.uom">
+        </mat-form-field>
+        <mat-form-field class="col-sm-2">
+          <span matPrefix>&#8377;</span>
+          <input matInput placeholder="Rate" [ngModelOptions]="{standalone: true}" [(ngModel)]="activity.rate">
+          <span matSuffix>.00</span>
+          <mat-icon class="link p-l-2" (click)="getAmount(schedule, activity)" matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <a class="padding">
+          <i (click)="removeActivity(index,idx)" class="material-icons link remove">clear</i>
+        </a>
+      </div>
+    </mat-card-content>
+  </mat-card>
   
-  <table class="sjs-table">
-    <tr *ngFor="let row of data">
-      <td *ngFor="let val of row">
-        {{val}}
-      </td>
-    </tr>
-  </table>
--->
-</div>
-<div mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="save()">Save</button>
-</div>
+  <div class="m-t">
+    <button mat-raised-button color="primary" (click)="addBill()">Add Bill</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </div>
+
+</form>

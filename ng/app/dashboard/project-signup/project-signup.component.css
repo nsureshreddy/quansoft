@@ -1,0 +1,20 @@
+.project-signup {
+  min-height: 544px;
+}
+.project-signup .header {
+  padding: 16px 24px 0;
+  margin: 0;
+}
+.project-signup mat-form-field {
+  width: 50%;
+}
+
+.signup-button {
+  margin-top: 16px;
+}
+
+@media only screen and (max-width:900px) {
+  .project-signup mat-form-field {
+    width: 100%;
+  }
+}

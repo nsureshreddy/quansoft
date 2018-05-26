@@ -1,0 +1,93 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side">
+    <div class="brand">
+      <a routerLink="../dashboard/proposals">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24" height="24">
+          <path d="M 4 4 L 44 4 L 44 44 Z" fill="#F5F5F5"></path>
+          <path d="M 4 4 L 34 4 L 24 24 Z" fill="rgba(0,0,0,0.15)"></path>
+          <path d="M 4 4 L 24 4 L 4  44 Z" fill="#f44455"></path>
+        </svg>
+      </a>
+    </div>
+    <nav class="left-nav">
+      <ul>
+        <li [ngClass]="{'active':index==activeIndex}" *ngFor="let tab of tabs; let index = index;">
+          <a routerLink="{{tab.link}}">
+            <i class="material-icons">{{tab.icon}}</i>
+            <span>{{tab.label}}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </mat-drawer>
+  <mat-toolbar class="app-toolbar">
+    <mat-toolbar-row>
+      <p class="brand-name p-l-1">QUANSOFT</p>
+      <div class="flex-spacer"></div>
+      <ul class="right-nav">
+        <li>
+          <i *ngIf="newUsers.length>0" class="material-icons badge" data-badge="1" [matMenuTriggerFor]="notifiications">notifications</i>
+          <i *ngIf="newUsers.length==0" class="material-icons" [matMenuTriggerFor]="notifiications">notifications</i>
+        </li>
+        <li class="user-name" [matMenuTriggerFor]="menu">
+          <span>{{user?.name}}</span>
+        </li>
+      </ul>
+      <mat-menu #notifiications="matMenu" [overlapTrigger]="false">
+        <div class="notifiications clear-fix">
+          <ul>
+            <li *ngFor="let user of newUsers">
+              <span class="icon pull-left">
+                <i class="material-icons">perm_identity</i>
+              </span>
+              <p>
+                <span class="block"> New User Registered </span>
+                <small class="text-muted">{{user.name}}</small>
+                <small class="text-muted p-l-2">1 day ago</small>
+              </p>
+              <div class="row notification-actions">
+                <div class="col-3 b-r">
+                  <a (click)="updateUserStatus(user, 'active')">
+                    <i matTooltip="Approve" class="material-icons link">done</i>
+                  </a>
+                </div>
+                <div class="col-3">
+                  <a (click)="updateUserStatus(user, 'archive')">
+                    <i matTooltip="Reject" class="material-icons link">delete_outline</i>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </mat-menu>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <div *ngIf="user" class="user-menu clear-fix">
+          <div class="avatar">
+            <span class="initials">SR</span>
+          </div>
+          <div class="user-name">
+            <h1>{{user.name}}</h1>
+            <p class="n-m-t">{{user.email}}</p>
+            <button mat-raised-button color="primary">View Profile</button>
+          </div>
+          <ul class="nav-items">
+            <li class="list-item">
+              <a routerLink="../settings">
+                <i class="material-icons">settings</i> Settings</a>
+            </li>
+            <li class="list-item">
+              <a routerLink="../settings/users">
+                <i class="material-icons">supervised_user_circle</i> Manage Users</a>
+            </li>
+            <li (click)="logout()" class="list-item">
+              <a>
+                <i class="material-icons">settings_power</i> Logout</a>
+            </li>
+          </ul>
+        </div>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</mat-drawer-container>

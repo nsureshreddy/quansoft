@@ -1,5 +1,22 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+require('./masterResource');
+var masterResourceSchema = require('mongoose').model('MasterResource').schema
+
+var rateComponentSchema = Schema({
+  label: {
+    type: String
+  },
+  type: {
+    type: String
+  },
+  items: [{
+    type: masterResourceSchema,
+    ref: 'MasterResource'
+  }]
+});
+
+var RateComponent = mongoose.model('RateComponent', rateComponentSchema);
 
 var masterScheduleActivitySchema = Schema({
   code: {
@@ -13,18 +30,22 @@ var masterScheduleActivitySchema = Schema({
   },
   uom: {
     type: String
+  },
+  rate: {
+    type: Number
+  },
+  rateComponents: [{
+    type: rateComponentSchema,
+    ref: 'RateComponent'
+  }],
+  profitMargin: {
+    type: Number
   }
 });
 
 var MasterScheduleActivity = mongoose.model('MasterScheduleActivity', masterScheduleActivitySchema);
 
-var MasterScheduleSchema = new Schema({
-  code: {
-    type: String
-  },
-  description: {
-    type: String
-  },
+var masterBillSchema = Schema({
   costCode: {
     type: String
   },
@@ -34,6 +55,21 @@ var MasterScheduleSchema = new Schema({
   activities: [{
     type: masterScheduleActivitySchema,
     ref: 'MasterScheduleActivity'
+  }]
+});
+
+var MasterBill = mongoose.model('MasterBill', masterBillSchema);
+
+var MasterScheduleSchema = new Schema({
+  code: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  bills: [{
+    type: masterBillSchema,
+    ref: 'MasterBill'
   }]
 });
 

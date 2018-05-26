@@ -1,0 +1,8 @@
+<mat-card>
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let type of resourceTypes" [routerLink]="type.path" routerLinkActive #rlaa="routerLinkActive" [active]="rlaa.isActive">
+      {{type.label}}
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
+</mat-card>

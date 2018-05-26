@@ -1,11 +1,8 @@
-import { MasterScheduleActivity } from "./MasterScheduleActivity";
+import { MasterBill } from "./MasterBill";
 
 export class MasterSchedule {
   _id: string;
   code: string;
   description: string;
-  costCode: string;
-  costCentre: string;
-  __v: string;
-  activities: Array<MasterScheduleActivity>;
+  bills: Array<MasterBill>
 }

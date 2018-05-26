@@ -2,15 +2,23 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
+var mail = require('../mail');
+
 var Project = require("../models/project");
 var Proposal = require("../models/proposal");
 
 var User = require("../models/user");
 var MasterSchedule = require("../models/masterSchedule");
+var MasterResource = require("../models/masterResource");
 
 // Get All Users
-router.get('/users', function(req, res) {
-  User.find({}, function(err, users) {
+router.get('/users/:status', function(req, res) {
+  var status = req.params.status;
+  var filter = {};
+  if (status) {
+    filter.status = status;
+  }
+  User.find(filter, function(err, users) {
     if (err) {
       return res.json({success: false, msg: err});
     }
@@ -18,28 +26,34 @@ router.get('/users', function(req, res) {
   });
 });
 
+router.post('/session', function (req,res) {
+  var token = req.body.token;
+  var user = jwt.verify(token, 'config.secret');
+  delete user.password;
+  return res.json(user);
+});
+
 // User Signup
 router.post('/signup', function(req, res) {
-  if (!req.body.name || !req.body.password) {
-    res.json({success: false, msg: 'Please pass username and password.'});
-  } else {
-    var newUser = new User({
-      name: req.body.name,
-      password: req.body.password,
-      phone: req.body.phone,
-      email: req.body.email,
-      designation: req.body.designation,
-      roles: [],
-      userId: req.body.userId
-    });
-    // save the user
-    newUser.save(function(err) {
-      if (err) {
-        return res.json({success: false, msg: err});
-      }
-      res.json({success: true, msg: 'Successful created new user.'});
-    });
+  var newUser = Object.assign(new User, req.body);
+  if (!newUser.userId) {
+    newUser.userId = newUser.name.split(' ').join('').toLowerCase();
   }
+  newUser.save(function(err) {
+    mail.sendWelcome(newUser);
+    if (err) {
+      return res.json({success: false, msg: err});
+    }
+    
+    res.json({success: true, msg: 'Successful created new user.'});
+  });
+});
+
+router.put('/update-user', (req, res) => {
+  var user = Object.assign(new User, req.body);
+  User.update({ _id: user._id }, user, { upsert: true}, (err, user) => {
+    res.json({ error: err, data: user });
+  });
 });
 
 // User signin
@@ -59,7 +73,7 @@ router.post('/signin', function (req, res) {
           var token = jwt.sign(user.toJSON(), 'config.secret');
           // return the information including token as JSON
 
-          res.json({ success: true, user: user, token: 'JWT ' + token });
+          res.json({ success: true, user: user, token:  token });
         } else {
           res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
         }
@@ -159,6 +173,36 @@ router.delete('/master-schedule/:_id', (req, res) => {
     return res.json({ error: err, data: response });
   });
 });
+
+
+// Master Resources
+router.get('/master-resource', (req, res) => {
+  MasterResource.find({}, (err, resources) => {
+    return res.json({ error: err, data: resources });
+  });
+});
+
+router.post('/master-resource', (req, res) => {
+  var masterResource = Object.assign(new MasterResource, req.body);
+  
+  masterResource.save(function(err, resources) {
+    res.json({error: err, data: resources });
+  });
+});
+
+router.put('/master-resource', (req, res) => {
+  var masterResource = Object.assign(new MasterResource, req.body);
+  MasterResource.update({ _id: masterResource._id }, masterResource, { upsert: true}, (err, resource) => {
+    res.json({ error: err, data: resource });
+  });
+});
+
+router.delete('/master-resource/:_id', (req, res) => {
+  MasterResource.findByIdAndRemove(req.params._id, (err, response) => {
+    return res.json({ error: err, data: response });
+  });
+});
+
 
 // Save New proposal
 router.post('/proposal', function(req, res) {

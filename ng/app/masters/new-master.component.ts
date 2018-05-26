@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MasterScheduleActivity } from '../app-models/MasterScheduleActivity';
+import { RateInputComponent } from './rate-input.component';
 import { MasterSchedule } from '../app-models/masterSchedule';
-import { ProposalService } from '../proposal.service';
-
-import * as XLSX from 'xlsx';
+import { MastersService } from '../services/masters.service';
+import { MasterScheduleActivity } from '../app-models/MasterScheduleActivity';
+import { RateComponent } from '../app-models/rateComponent';
+import { MasterBill } from '../app-models/MasterBill';
 
 @Component({
   selector: 'app-new-master',
@@ -13,83 +14,72 @@ import * as XLSX from 'xlsx';
 })
 export class NewMasterComponent implements OnInit {
   schedule: MasterSchedule;
+  dialogConfig: any = {};
+
   constructor(public dialogRef: MatDialogRef<NewMasterComponent>,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private proposalService: ProposalService) {
+    private masterService: MastersService) {
   }
 
   ngOnInit() {
     this.schedule = this.data || new MasterSchedule();
   }
 
-  addActivity() {
-    if (!this.schedule.activities) {
-      this.schedule.activities = new Array<MasterScheduleActivity>();
-    }
-    var length = this.schedule.activities.length;
-    var o = Object.assign(new MasterScheduleActivity, {});
-
-    this.schedule.activities[length] = o;
-  }
-
-  onFileChange(event: any) {
-    const target: DataTransfer = <DataTransfer>(event.target);
-    if (target.files.length !== 1) {
-      console.log('Can\'t upload multiple file')
-      return;
-    }
-    const reader: FileReader = new FileReader();
-    reader.onload = (e: any) => {
-      const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
-
-      const wsname: string = wb.SheetNames[0];
-      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-      var masterData = [];
-      this.data = <XLSX.AOA2SheetOpts>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
-      var rowCount = this.data.length;
-      var columns = this.data[2];
-      for (var i = 3; i <= rowCount;) {
-        if (this.data[i] && this.data[i].length == 1) {
-          var category: any = {};
-          category.name = this.data[i][0];
-          category.activities = [];
-          i += 1;
-          while (this.data[i].length > 1 && i <= rowCount) {
-            var o = this.getObject(columns, this.data[i]);
-            category.activities.push(o);
-            i += 1;
-          }
-          masterData.push(category);
-        } else {
-          i++;
-        }
-      }
+  getAmount(master: MasterSchedule, activity: MasterScheduleActivity) {
+    this.dialogConfig.panelClass = 'rate-input-dialog';
+    this.dialogConfig.data = {
+      master: master,
+      activity: activity
     };
-    reader.readAsBinaryString(target.files[0]);
-  }
 
-  getObject(keys, values) {
-    var object = {};
-    keys.forEach((key, index) => {
-      key = this.normalizeKey(key);
-      object[key] = values[index];
+    let dialogRef = this.dialog.open(RateInputComponent, this.dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data => {
+      let subTotal = 0;
+      let rateComponents: Array<RateComponent> = [];
+      if (data && data.scheduleOfRates) {
+        data.scheduleOfRates.forEach(element => {
+          if (element.subTotal) {
+            subTotal += +element.subTotal;
+          }
+          if (element.items && element.items.length) {
+            rateComponents.push(element);
+          }
+        });
+        activity.rateComponents = rateComponents;
+        activity.rate = subTotal * (1 + data.profitMargin/100);
+        activity.profitMargin = data.profitMargin;
+      }
     });
-    return object;
   }
 
-  normalizeKey(key) {
-    key = key.trim();
-    key = key.split(' ').join('');
-    key = key.replace('/', 'Per');
+  addActivity(bill: MasterBill) {
+    if (!bill.activities) {
+      bill.activities = new Array<MasterScheduleActivity>();
+    }
+    
+    let newActivity = Object.assign(new MasterScheduleActivity, {});
+    bill.activities.push(newActivity);
+  }
 
-    return key;
+  removeActivity (index, idx) {
+    this.schedule.bills[index].activities.splice(idx, 1);
+  }
+
+  addBill() {
+    if (!this.schedule.bills) {
+      this.schedule.bills = [];
+    }
+    this.schedule.bills.push(new MasterBill({}));
+  }
+
+  removeBill (index) {
+    this.schedule.bills.splice(index, 1);
   }
 
   save() {
-    this.schedule.activities.pop();
-    this.proposalService.saveMasterSchedule(this.schedule).subscribe((response: any) => {
+    this.masterService.saveMasterSchedule(this.schedule).subscribe((response: any) => {
       this.dialogRef.close({ master: response.data });
     });
   }

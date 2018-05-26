@@ -1,0 +1,71 @@
+<mat-card>
+  <div class="cost-estimates mat-elevation-z8">
+    <h3 class="header">Cost Estimates</h3>
+
+    <mat-grid-list cols="11" rowHeight="50px">
+      <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="columnBackground"
+        [style.color]="columnTextColor">
+        {{tile.text}}
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-form-field class="demo-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (remove)="remove(fruit)">
+                {{fruit.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                matInput placeholder="Choose Master Schedule" [matAutocomplete]="auto" [formControl]="masterSchedule">
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="fetchMaster($event.option.value)">
+                <mat-option *ngFor="let master of masters" [value]="master.code">
+                  {{ master.code }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-chip-list>
+          </mat-form-field>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let selectedMaster of selectedMasters">
+        <ng-container *ngIf="selectedMaster">
+          <mat-grid-list cols="11" rowHeight="100px" *ngFor="let bill of selectedMaster.bills">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">{{bill.costCode}}</mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">{{bill.costCentre}}</mat-grid-tile>
+            <mat-grid-tile [colspan]="9" [rowspan]="1"></mat-grid-tile>
+            <ng-container *ngFor="let activity of bill.activities">
+              <mat-grid-tile [colspan]="2" [rowspan]="1"></mat-grid-tile>
+              <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.code}}</mat-grid-tile>
+              <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.shortDescription}}</mat-grid-tile>
+              <mat-grid-tile class="activity-description" [colspan]="2" [rowspan]="1">{{activity.description}}</mat-grid-tile>
+              <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.uom}}</mat-grid-tile>
+              <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field style="width: 60px;">
+                  <input matInput (blur)="getTotal(activity)" placeholder="Qty." [(ngModel)]="activity.quantity">
+                  <mat-icon class="link" (click)="getQuantity(selectedMaster, activity)" matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field style="width: 100px;">
+                  <span matPrefix>&#8377;</span>
+                  <input matInput placeholder="Rate" name="rate" [(ngModel)]="activity.rate">
+                  <span matSuffix>.00</span>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field style="width: 100px;">
+                  <span matPrefix>&#8377;</span>
+                  <input matInput placeholder="Amount" [(ngModel)]="activity.amount">
+                  <span matSuffix>.00</span>
+                </mat-form-field>
+              </mat-grid-tile>
+            </ng-container>
+          </mat-grid-list>
+        </ng-container>
+      </ng-container>
+    </mat-expansion-panel>
+
+  </div>
+</mat-card>

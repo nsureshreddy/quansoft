@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 
+
+import { MatFileUploadModule } from 'angular-material-fileupload';
+
 import {
   MatToolbarModule,
   MatSidenavModule,
@@ -26,7 +29,8 @@ import {
   MatChipsModule,
   MatIconModule,
   MatAutocompleteModule,
-  MatSliderModule
+  MatSliderModule,
+  MatExpansionModule
 } from '@angular/material';
 
 @NgModule({
@@ -56,7 +60,8 @@ import {
     MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatSliderModule
+    MatSliderModule,
+    MatExpansionModule
   ]
 })
 

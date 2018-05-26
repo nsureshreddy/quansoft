@@ -1,0 +1,25 @@
+.rate-input-component {
+    max-height: calc(100vh - 64px);
+    overflow: auto;
+  }
+
+.accordion-headers-align .mat-expansion-panel-header-title, 
+.accordion-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.accordion-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-item {
+    position: absolute;
+    top: -16px;
+    right: 46px;
+    color: blue;
+    cursor: pointer;
+}
+.add-item i {
+    vertical-align: middle;
+}

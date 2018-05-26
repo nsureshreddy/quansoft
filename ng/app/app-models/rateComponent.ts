@@ -1,17 +1,12 @@
+import { MasterResource } from "./masterResource";
+
 export class RateComponent {
     label: string;
-    items: RateItem []
-    constructor(label: string, items: RateItem[]) {
+    type: string;
+    items: MasterResource []
+    constructor(label: string, type: string, items: MasterResource[]) {
         this.label = label;
+        this.type  = type;
         this.items = items;
     }
-}
-
-export class RateItem {
-    code: string;
-    description: string;
-    uom: string;
-    coeff: string;
-    rate: number;
-    amount: number;
 }

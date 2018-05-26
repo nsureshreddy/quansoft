@@ -1,18 +1,14 @@
-.new-master-schedule mat-form-field {
-  width: 50%;
+.new-master-schedule {
+  max-height: calc(100vh - 64px);
+  overflow: auto;
 }
-.activities  .mat-form-field.input {
-  width: 120px;
-}
-.activities  .mat-form-field.textarea {
-  width: 440px;
-}
+
 .add-activity {
   display: block;
   font-size: 14px;
   margin: 0 0 .875rem;
   color: blue;
-  cursor: pointer;   
+  cursor: pointer;
 }
 
 @media only screen and (max-width:900px) {

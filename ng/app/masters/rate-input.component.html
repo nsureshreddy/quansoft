@@ -1,0 +1,88 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Rate Input</span>
+    <span class="flex-spacer"></span>
+    <button mat-icon-button [mat-dialog-close]>
+      <i class="material-icons">clear</i>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-dialog-content>
+  <div class="rate-input-component">
+    <mat-accordion class="accordion-headers-align">
+      <mat-expansion-panel *ngFor="let item of activity.rateComponents;let index=index" [expanded]="step === index" (opened)="setStep(index)"
+        hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{item.label}}
+          </mat-panel-title>
+          <mat-panel-description>
+            <span class="flex-spacer"></span>
+            <mat-icon *ngIf="step!=index">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="step==index">keyboard_arrow_down</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <a class="add-item" (click)="addNewItem(item)">
+          <i class="material-icons link">add</i> New
+        </a>
+        <ng-container *ngFor="let _item of item.items;let idx=index">
+          <mat-form-field class="input-code">
+            <input matInput placeholder="Code" [ngModelOptions]="{standalone: true}" [(ngModel)]="_item.code" [matAutocomplete]="auto1">
+            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="parent=index;child=idx;fetchResource($event.option.value)">
+              <mat-option *ngFor="let resource of resources| filter:{key: 'resourceType', value: item.type}" [value]="resource.code">
+                {{ resource.code }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="input-desc">
+            <input matInput placeholder="Description" [ngModelOptions]="{standalone: true}" [(ngModel)]="_item.description" [matAutocomplete]="auto2">
+            <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="parent=index;child=idx;fetchResourceByDescription($event.option.value)">
+              <mat-option *ngFor="let resource of resources" [value]="resource.description">
+                {{ resource.description }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="input-uom">
+            <input matInput placeholder="UOM" [ngModelOptions]="{standalone: true}" [(ngModel)]="_item.uom">
+          </mat-form-field>
+          <mat-form-field class="input-coeff">
+            <input matInput placeholder="Coeff" [ngModelOptions]="{standalone: true}" (keyup)="calculateAmount(_item, item)" [(ngModel)]="_item.coeff">
+          </mat-form-field>
+          <mat-form-field class="input-rate">
+            <input matInput placeholder="Rate" [ngModelOptions]="{standalone: true}" (keyup)="calculateAmount(_item,item)" [(ngModel)]="_item.rate">
+          </mat-form-field>
+          <mat-form-field class="input-amount">
+            <span matPrefix>&#8377;</span>
+            <input matInput placeholder="Amount" (keyup)="calculateSubTotal(item)" [ngModelOptions]="{standalone: true}" [(ngModel)]="_item.amount">
+            <span matSuffix>.00</span>
+          </mat-form-field>
+          <a class="padding">
+            <i (click)="removeItem(idx, item)" class="material-icons link remove">close</i>
+          </a>
+        </ng-container>
+        <mat-action-row>
+          <p class="sub-total font-sm _600" *ngIf="item.subTotal">Sub Total of {{item.label}}: {{item.subTotal}}</p>
+          <button *ngIf="step>0" mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button *ngIf="step!=2" mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="padding m-t">
+      <div>
+        <small class="text-muted">Total Cost: </small>
+        <span class="_500">{{activity.totalCost}}</span>
+      </div>
+      <div>
+        <span class="flex-spacer"></span>
+        <small class="text-muted">Overhead & Profile Margin ({{activity.profitMargin}}%)</small>
+        <mat-slider (change)="calculateRatePerUnit()" [max]="100" [min]="0" [step]="1" [thumb-label]="true" [tick-interval]="1" [(ngModel)]="activity.profitMargin"></mat-slider>
+      </div>
+      <div>
+        <span class="_600">Calculated Rate/Unit: </span> {{activity.ratePerUnit}}
+      </div>
+      <div class="m-t">
+        <button mat-raised-button color="primary" (click)="approve()">Approve Rate/Unit</button>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

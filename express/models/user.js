@@ -21,16 +21,20 @@ var UserSchema = new Schema({
   },
   userId: {
     type: String,
-    unique: true,
-    required: true
+    required: true,
+    unique: true
   },
   roles: {
     type: Array
+  },
+  status: {
+    type: String
   }
 });
 
 UserSchema.pre('save', function (next) {
   var user = this;
+  
   if (this.isModified('password') || this.isNew) {
     bcrypt.genSalt(10, function (err, salt) {
       if (err) {

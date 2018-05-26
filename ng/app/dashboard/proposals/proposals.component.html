@@ -1,0 +1,87 @@
+<mat-card>
+  <div [hidden]="!projectsDataSource.data.length" class="project-list mat-elevation-z8">
+    <mat-table #table [dataSource]="projectsDataSource">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Project Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef> Client </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.client}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef> Location </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="region">
+        <mat-header-cell *matHeaderCellDef> Region </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="stage">
+        <mat-header-cell *matHeaderCellDef> Stage </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.stage}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="scope">
+        <mat-header-cell *matHeaderCellDef> Scope </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.scope}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="jobId">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element" class="project-actions">
+          <i class="material-icons link" [matMenuTriggerFor]="menu">more_vert</i>
+
+          <mat-menu class="more-vert-menu" #menu="matMenu">
+              <button routerLink="../proposal/{{element.jobId}}" mat-menu-item>
+                <i class="material-icons menu-link">library_add</i>
+                Add/Edit Proposal
+              </button>
+              <button routerLink="../proposal-detail/{{element.jobId}}" mat-menu-item>
+                  <i class="material-icons menu-link">insert_drive_file</i>
+                  View Proposal
+              </button>
+              <button routerLink="../proposal/{{element.jobId}}/assign-users" mat-menu-item>
+                  <i class="material-icons menu-link">assignment_ind</i>
+                  Assign Users
+              </button>
+              <button routerLink="../proposal/{{element.jobId}}/cost-estimates" mat-menu-item>
+                  <i class="material-icons menu-link">monetization_on</i>
+                  <span>Cost Estimates</span>
+              </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+    </mat-paginator>
+
+    <button routerLink="../project-signup" matTooltip="Add Another Project" class="add-another" mat-mini-fab color="warn">
+      <i class="material-icons link" mat-button>add</i>
+    </button>
+  </div>
+  <div [hidden]="projectsDataSource.data.length" class="first-project-msg">
+    <img src="/assets/images/no-proposals-illustration.png">
+    <div>
+      <h2>Create your first project</h2>
+      <p>
+        You haven't added any project yet.
+        <br/> Sign-up a project to start submitting proposals.</p>
+      <button class="add-project" routerLink="../project-signup" mat-raised-button color="primary">
+        CREATE A PROJECT
+      </button>
+    </div>
+  </div>
+</mat-card>
