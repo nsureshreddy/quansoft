@@ -17,6 +17,7 @@ export class AppLayoutComponent implements OnInit {
   tabs: any[] = [
     {link: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
     {link: '/masters', label: 'Masters', icon: 'book' },
+    {link: '/cost-estimates', label: 'Cost Estimates', icon: 'monetization_on' },
     {link: '/vendors', label: 'Vendors', icon: 'people' },
     {link: '/settings', label: 'Settings', icon: 'settings' }
   ];

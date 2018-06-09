@@ -1,5 +1,9 @@
 <nav mat-tab-nav-bar>
-  <a mat-tab-link *ngFor="let type of mastersTypes" [routerLink]="type.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+  <a mat-tab-link
+  *ngFor="let type of mastersTypes"
+  [routerLink]="type.path"
+  routerLinkActive #rla="routerLinkActive"
+  [active]="rla.isActive">
     {{type.label}}
   </a>
 </nav>

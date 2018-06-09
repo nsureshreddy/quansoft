@@ -32,8 +32,8 @@ import { ManpowerCostsComponent } from './masters/manpower-costs/manpower-costs.
 import { MaterialCostsComponent } from './masters/material-costs/material-costs.component';
 import { MasterSchedulesComponent } from './masters/master-schedules/master-schedules.component';
 import { BillDetailComponent } from './masters/bill-detail/bill-detail.component';
-import { RateInputComponent } from './masters/rate-input.component';
-import { NewMasterComponent } from './masters/new-master.component';
+import { RateInputComponent } from './masters/rate-input/rate-input.component';
+import { NewMasterComponent } from './masters/new-master/new-master.component';
 import { QuantityInputComponent } from './dashboard/quantity-input/quantity-input.component';
 import { AlwaysAuthGuard } from './services/authguard';
 import { LoginService } from './services/login.service';
@@ -86,7 +86,9 @@ import { LoginService } from './services/login.service';
   ],
   entryComponents: [
     NewMasterComponent,
-    RateInputComponent
+    RateInputComponent,
+    QuantityInputComponent
+    
   ],
   bootstrap:    [ AppComponent ]
 })

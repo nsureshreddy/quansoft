@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { MasterSchedule } from '../app-models/masterSchedule';
-import { MasterScheduleActivity } from '../app-models/MasterScheduleActivity';
-import { MasterResource } from '../app-models/masterResource';
-import { MastersService } from '../services/masters.service';
-import { RateComponent } from '../app-models/rateComponent';
+import { MasterSchedule } from '../../app-models/masterSchedule';
+import { MasterScheduleActivity } from '../../app-models/MasterScheduleActivity';
+import { MasterResource } from '../../app-models/masterResource';
+import { MastersService } from '../../services/masters.service';
+import { RateComponent } from '../../app-models/rateComponent';
 
 @Component({
   selector: 'app-rate-input',

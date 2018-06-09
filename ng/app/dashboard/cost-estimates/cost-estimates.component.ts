@@ -59,6 +59,7 @@ export class CostEstimatesComponent implements OnInit {
   getMasters() {
     this.masterService.getMasterSchedules().subscribe((response: any)=>{
       this.masters = response.data;
+      this.selectedMasters.push(this.masters[0]);
     });
   }
 

@@ -95,6 +95,10 @@ h1, h2, h3, h4, h5, h6 {
   outline: none;
 }
 
+.p-t-4 {
+  padding-top: 2rem;
+}
+
 .p-l-1 {
   padding-left: .5rem;
 }
@@ -103,6 +107,9 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 1rem;
 }
 
+.n-m {
+  margin: 0;
+}
 .n-m-t {
   margin-top: 0;
 }
@@ -138,6 +145,7 @@ li {
 
 .text-muted {
   opacity: .6;
+  font-size: 14px;
 }
 .row {
   margin-bottom: .75rem;
@@ -185,7 +193,7 @@ li {
 }
 
 .t-d-u {
-  text-decoration: underline;
+  text-decoration: underline!important;
 }
 .d-i-b {
   display: inline-block;
@@ -302,9 +310,30 @@ li {
   position: relative;
 }
 
-.grid-custom .mat-figure {
+.masters-grid .mat-figure {
   display: block!important;
+  padding-left: 16px!important;
+  border-right: 1px solid #ccc;
 }
+
+.masters-grid .mat-figure .package-search {
+  width: 90%;
+}
+
+.masters-grid .mat-figure .package-item {
+  padding: 12px 16px;
+}
+.masters-grid .bill-detail {
+  border: 1px solid #ccc;
+  margin-bottom: 0;
+}
+.masters-grid .bill-view .mat-grid-list {
+  border: 1px solid #ccc;
+  border-top: none;  
+}
+
+
 a {
   text-decoration: none;
 }
+

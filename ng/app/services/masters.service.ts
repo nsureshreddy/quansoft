@@ -158,6 +158,12 @@ export class MastersService {
     var hot = new Handsontable(element, hotSettings);
   }
 
+  getQuantityFieldsByUOM(uom: string) {
+    return (this.quantityFields.find(item=>{
+      return item.uom === uom;
+    })).values;
+  }
+
   isEmpty(obj) {
     for(var key in obj) {
       if(obj.hasOwnProperty(key))
@@ -165,4 +171,85 @@ export class MastersService {
     }
     return true;
   }
+
+  quantityFields = [
+    {
+      uom: 'nos',
+      values: {
+        headers: ['Code', 'Item Description', 'Factor', 'Coeff', 'Nos', 'Qty'],
+        colDefs: [
+          { data: 'code', type: 'numeric', width: 40 },
+          { data: 'description' },
+          { data: 'factor', type: 'numeric' },
+          { data: 'coeff', type: 'numeric' },
+          { data: 'nos', type: 'numeric' },
+          { data: 'qty', type: 'numeric' }
+        ]
+      }
+    },
+    {
+      uom: 'length',
+      values: {
+        headers: ['Code', 'Item Description', 'From', 'To', 'Factor', 'Coeff', 'Nos', 'L', 'Qty'],
+        colDefs: [
+          { data: 'code', type: 'numeric', width: 40 },
+          { data: 'description' },
+          { data: 'from', type: 'numeric' },
+          { data: 'to', type: 'numeric' },
+          { data: 'factor', type: 'numeric' },
+          { data: 'coeff', type: 'numeric' },
+          { data: 'nos', type: 'numeric' },
+          { data: 'l', type: 'numeric' },
+          { data: 'qty', type: 'numeric' }
+        ]
+      }
+    },
+    {
+      uom: 'area',
+      values: {
+        headers: ['Code', 'Item Description', 'Factor', 'Coeff', 'Nos', 'L', 'B', 'Qty'],
+        colDefs: [
+          { data: 'code', type: 'numeric', width: 40 },
+          { data: 'description' },
+          { data: 'factor', type: 'numeric' },
+          { data: 'coeff', type: 'numeric' },
+          { data: 'nos', type: 'numeric' },
+          { data: 'l', type: 'numeric' },
+          { data: 'b', type: 'numeric' },
+          { data: 'qty', type: 'numeric' }
+        ]
+      }
+    },
+    {
+      uom: 'volume',
+      values: {
+        headers: ['Code', 'Item Description', 'Factor', 'Coeff', 'Nos', 'L', 'B', 'D', 'Qty'],
+        colDefs: [
+          { data: 'code', type: 'numeric', width: 40 },
+          { data: 'description' },
+          { data: 'factor', type: 'numeric' },
+          { data: 'coeff', type: 'numeric' },
+          { data: 'nos', type: 'numeric' },
+          { data: 'l', type: 'numeric' },
+          { data: 'b', type: 'numeric' },
+          { data: 'd', type: 'numeric' },
+          { data: 'qty', type: 'numeric' }
+        ]
+      }
+    },
+    {
+      uom: 'weight',
+      values: {
+        headers: ['Code', 'Item Description', 'Factor', 'Coeff', 'Nos', 'Qty'],
+        colDefs: [
+          { data: 'code', type: 'numeric', width: 40 },
+          { data: 'description' },
+          { data: 'factor', type: 'numeric' },
+          { data: 'coeff', type: 'numeric' },
+          { data: 'nos', type: 'numeric' },
+          { data: 'qty', type: 'numeric' }
+        ]
+      }
+    }
+  ]
 }

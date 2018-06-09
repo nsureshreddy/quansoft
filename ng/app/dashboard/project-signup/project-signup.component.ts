@@ -54,17 +54,13 @@ export class ProjectSignupComponent {
   }
 
   signup() {
-    this.project = Object.assign(new Project, 
-      this.orgForm.value, 
-      this.orderForm.value, 
-      this.scopeForm.value);
+    this.project = Object.assign(new Project, this.orgForm.value, this.orderForm.value, this.scopeForm.value);
 
     this.proposalService.projectSignup(this.project).subscribe(resp => {
       this.snackBar.open('Project Created Successfully.', '', {
         duration: 3000,
       });
       this.router.navigate(['dashboard/proposals']);
-    }, err => {
     });
   }
 }

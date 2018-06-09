@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
 import * as Handsontable from 'handsontable';
+import { MastersService } from '../../services/masters.service';
 
 @Component({
   selector: 'app-quantity-input',
@@ -10,87 +11,40 @@ import * as Handsontable from 'handsontable';
   styleUrls: ['./quantity-input.component.css']
 })
 export class QuantityInputComponent implements OnInit {
-
-  constructor(public dialogRef: MatDialogRef<QuantityInputComponent>) { }
+  columns: any;
+  constructor(private mastersService: MastersService, 
+    public dialogRef: MatDialogRef<QuantityInputComponent>) { }
   
   ngOnInit() {
+    this.columns = this.mastersService.getQuantityFieldsByUOM('length');
     this.loadHandson();
   }
-
+  
   loadHandson() {
+    var data1 = [
+      ['=$B$2', "Maserati", "Mazda", "Mercedes", "Mini", "=A$1"],
+      [2009, 0, 2941, 4303, 354, 5814],
+      [2010, 5, 2905, 2867, '=SUM(A4,2,3)', '=$B1'],
+      [2011, 4, 2517, 4822, 552, 6127],
+      [2012, '=SUM(A2:A5)', '=SUM(B5,E3)', '=A2/B2', 12, 4151]
+    ];
+
     var self = this;
     var dataObject = [];
     
     var hotElement = document.querySelector('#hot');
+    
     var hotElementContainer = hotElement.parentNode;
     var hotSettings = {
-      afterChange: (data) => {
-        
-      },
-      beforeRemoveRow: (data) => {
-        
-      },
-      formulas: true,
-      minSpareRows: 1,
-      columnSorting: true,
-      sortIndicator: true,
-      data: [],
-      columns: [
-        {
-          data: 'refNo',
-          type: 'numeric',
-          width: 40
-        },
-        {
-          data: 'description'
-        },
-        {
-          data: 'Nos',
-          type: 'numeric'
-        },
-        {
-          data: 'l',
-          type: 'numeric'
-        },
-        {
-          data: 'b',
-          type: 'numeric'
-        },
-        {
-          data: 'd',
-          type: 'numeric'
-        },
-        {
-          data: 'qty',
-          type: 'numeric'
-        }
-      ],
-      stretchH: 'all',
-      autoWrapRow: true,
-      height: 440,
-      manualRowResize: true,
-      manualColumnResize: true,
-      rowHeaders: true,
-      colHeaders: [
-        'Ref. No.',
-        'Description',
-        'Nos',
-        'L',
-        'B',
-        'D',
-        'Qty.'
-      ],
-      manualRowMove: true,
-      manualColumnMove: true,
-      contextMenu: true,
-      filters: true,
-      dropdownMenu: true
+      data: data1,
+    minSpareRows: 1,
+    colHeaders: true,
+    rowHeaders: true,
+    contextMenu: true,
+    manualColumnResize: true,
+    formulas: true
     };
     var hot = new Handsontable(hotElement, hotSettings);
-  }
-
-  onFileChange(event) {
-    
   }
 
 }

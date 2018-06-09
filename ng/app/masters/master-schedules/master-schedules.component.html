@@ -1,98 +1,62 @@
-<mat-card>
-  <div [hidden]="!mastersDataSource.data.length" class="masters-list mat-elevation-z8">
-    <mat-table #table [dataSource]="mastersDataSource">
-      <ng-container matColumnDef="code">
-        <mat-header-cell *matHeaderCellDef> Package Code </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="bills">
-        <mat-header-cell *matHeaderCellDef> Bills </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <a class="link" routerLink="../bill-detail" *ngFor="let bill of element.bills">{{bill.costCode}}</a>
-          <mat-menu #detailedBill="matMenu">
-            <!--<div *ngFor="let activity of selectedBill?.activities">
-              <div *ngFor="let item of activity.rateComponents">
-                <p>{{item.label}}</p>
-                <ng-container *ngFor="let _item of item.items">
-                  <p>{{_item.code}}</p>
-                  <p>{{_item.description}}</p>
-                  <p>{{_item.uom}}</p>
-                  <p>{{_item.coeff}}</p>
-                  <p>{{_item.rate}}</p>
-                  <p>
-                    <span matPrefix>&#8377;</span>
-                    {{_item.amount}}
-                    <span matSuffix>.00</span>
-                  </p>
-                </ng-container>
-                <p class="sub-total font-sm _600" *ngIf="item.subTotal">Sub Total of {{item.label}}: {{item.subTotal}}</p>
+<div class="padding">
+  <mat-grid-list cols="4" rowHeight="600px">
+    <mat-grid-tile class="masters-grid" [colspan]="1" [rowspan]="1">
+      <p *ngIf="!masters">No Packages Found.</p>
+      <mat-form-field *ngIf="masters" class="package-search">
+        <span matPrefix> <i class="material-icons v-a-m">search</i>&nbsp;</span>
+        <input (keyup)="filterByName()" [(ngModel)]="packageName" type="text" matInput placeholder="Search Package">
+      </mat-form-field>
+      <div (click)="selectedPackage = package;" class="package-item" *ngFor="let package of masters;let index=index;">
+        <p class="n-m">{{package.code}}</p>
+        <small class="block text-muted">{{package.description}}</small>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="masters-grid" [colspan]="3" [rowspan]="1">
+      <mat-card *ngIf="selectedPackage" class="bill-view row">
+          <div class="col-3">
+              <small class="text-muted">Package</small>
+              <div class="_500">{{selectedPackage.code}}</div>
+          </div>
+          <div class="col-9">
+              <small class="text-muted">Description</small>
+              <div class="_500">{{selectedPackage.description}}</div>
+          </div>
+          <div class="col-12 p-t-4" *ngFor="let bill of selectedPackage.bills">
+            <div class="row bill-detail">
+              <div class="col-3 padding">
+                <small class="text-muted">Cost Code</small>
+                <div class="_500">{{bill.costCode}}</div>
               </div>
-            </div>-->
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Code</th>
-                  <th style="width: 200px;">Short Description</th>
-                  <th style="width: 200px;">Description</th>
-                  <th style="width: 100px;">UOM</th>
-                  <th style="width: 100px;">Rate</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let activity of selectedBill?.activities">
-                  <th style="text-align: center;">
-                    <span>{{activity.code}}</span>
-                  </th>
-                  <td style="text-align: center;">
-                      <span>{{activity.shortDescription}}</span>
-                  </td>
-                  <td style="text-align: center;">
-                      <span>{{activity.description}}</span>
-                  </td>
-                  <td style="text-align: center;">
-                    <span>{{activity.uom}}</span>
-                  </td> 
-                  <td style="text-align: center;">
-                      <span>{{activity.rate}}</span>
-                  </td>
-                </tr>
-                
-                <tr>
-                  <th style="text-align: right" colspan="4">Total</th>
-                  <td style="text-align: right">
-                    <span data-bind="text: formatCurrency(grandTotal())">$32.69</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </mat-menu>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="_id">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element" class="masters-actions">
-          <i (click)="editMaster(element._id)" matTooltip="Edit Masters" class="material-icons link">mode_edit</i>
-          <i (click)="deleteMaster(element._id)" matTooltip="Delete Masters" class="material-icons link">delete</i>
-        </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-    </mat-paginator>
-    <button (click)="newMasterDialog(false)" matTooltip="Add Another Master" class="add-another" mat-mini-fab color="warn">
-      <i class="material-icons link" mat-button>add</i>
-    </button>
-  </div>
-  <div [hidden]="mastersDataSource.data.length" class="first-project-msg text-center">
-    <img src="/assets/images/no-proposals-illustration.png"/>
-    <h2>No Master Schedules Found.</h2>
-    <button (click)="newMasterDialog(false)" mat-raised-button color="primary">
-      CREATE A MASTER SCHEDULE
-    </button>
-  </div>
-</mat-card>
+              <div class="col-9 padding">
+                <small class="text-muted">Cost Centre</small>
+                <div class="_500">{{bill.costCentre}}</div>
+              </div>
+            </div>
+          
+            <mat-grid-list cols="12" rowHeight="100px">
+              <ng-container *ngFor="let activity of bill.activities">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.code}}</mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.shortDescription}}</mat-grid-tile>
+                <mat-grid-tile class="activity-description" [colspan]="4" [rowspan]="1">{{activity.description}}</mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.uom}}</mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                  <mat-form-field style="width: 100px;">
+                    <span matPrefix>&#8377;</span>
+                    <input matInput placeholder="Rate" name="rate" [(ngModel)]="activity.rate">
+                    <span matSuffix>.00</span>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                  <mat-form-field style="width: 100px;">
+                    <span matPrefix>&#8377;</span>
+                    <input matInput placeholder="Amount" [(ngModel)]="activity.amount">
+                    <span matSuffix>.00</span>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </ng-container>
+            </mat-grid-list>
+          </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

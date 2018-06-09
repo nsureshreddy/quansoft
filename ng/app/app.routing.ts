@@ -58,6 +58,10 @@ const appRoutes: Routes = [
           { path: 'bill-detail', component: BillDetailComponent, pathMatch: 'full' },
         ]
       },
+      {
+        path: 'cost-estimates',
+        component: CostEstimatesComponent
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ],
     canActivate: [AlwaysAuthGuard]
