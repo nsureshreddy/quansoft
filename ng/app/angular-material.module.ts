@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 
-
-import { MatFileUploadModule } from 'angular-material-fileupload';
-
 import {
   MatToolbarModule,
   MatSidenavModule,
