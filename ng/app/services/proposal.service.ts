@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { forkJoin } from "rxjs/observable/forkJoin";
+import { forkJoin } from "rxjs";
 
 import { ScopeItem } from '../app-models/scopeItem';
 import { Project } from '../app-models/project';

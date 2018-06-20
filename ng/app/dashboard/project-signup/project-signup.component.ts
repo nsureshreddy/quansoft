@@ -31,25 +31,25 @@ export class ProjectSignupComponent {
     this.orgForm = this._formBuilder.group({
       name: ['', Validators.required],
       client: ['', Validators.required],
-      region: ['', Validators.required],
-      location: ['', Validators.required]
+      region: [''],
+      location: ['']
     });
 
     this.orderForm = this._formBuilder.group({
-      siteArea: ['', Validators.required],
-      builtupArea: ['', Validators.required],
-      numberOfFloors: ['', Validators.required],
-      numberOfBuildings: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      siteArea: [''],
+      builtupArea: [''],
+      numberOfFloors: [''],
+      numberOfBuildings: [''],
+      startDate: [''],
+      endDate: ['']
     });
 
     this.scopeForm = this._formBuilder.group({
-      type: ['', Validators.required],
+      type: [''],
       stage: ['New', Validators.required],
-      scope: [[], Validators.required],
-      fsi: ['', Validators.required],
-      participants: [[], Validators.required]
+      scope: [[]],
+      fsi: [''],
+      participants: [[]]
     });
   }
 
@@ -57,9 +57,7 @@ export class ProjectSignupComponent {
     this.project = Object.assign(new Project, this.orgForm.value, this.orderForm.value, this.scopeForm.value);
 
     this.proposalService.projectSignup(this.project).subscribe(resp => {
-      this.snackBar.open('Project Created Successfully.', '', {
-        duration: 3000,
-      });
+      this.snackBar.open('Project Created Successfully.', 'Dismiss', {});
       this.router.navigate(['dashboard/proposals']);
     });
   }

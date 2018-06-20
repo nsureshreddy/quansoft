@@ -18,6 +18,7 @@ import { ManpowerCostsComponent } from './masters/manpower-costs/manpower-costs.
 import { MasterSchedulesComponent } from './masters/master-schedules/master-schedules.component';
 import { BillDetailComponent } from './masters/bill-detail/bill-detail.component';
 import { AlwaysAuthGuard } from './services/authguard';
+import { VendorsComponent } from './vendors/vendors.component';
 
 
 const appRoutes: Routes = [
@@ -57,6 +58,10 @@ const appRoutes: Routes = [
           { path: 'schedules', component: MasterSchedulesComponent, pathMatch: 'full' },
           { path: 'bill-detail', component: BillDetailComponent, pathMatch: 'full' },
         ]
+      },
+      {
+        path: 'vendors',
+        component: VendorsComponent
       },
       {
         path: 'cost-estimates',

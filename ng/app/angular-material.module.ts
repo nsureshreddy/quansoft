@@ -13,21 +13,19 @@ import {
   MatInputModule,
   MatSelectModule,
   MatCheckboxModule,
-  MatProgressSpinnerModule,
-  MatProgressBarModule,
   MatCardModule,
   MatNativeDateModule,
   MatDatepickerModule,
   MatGridListModule,
-  MatListModule,
   MatTooltipModule,
   MatStepperModule,
   MatSnackBarModule,
-  MatChipsModule,
   MatIconModule,
   MatAutocompleteModule,
   MatSliderModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatBottomSheetModule,
+  MatListModule
 } from '@angular/material';
 
 @NgModule({
@@ -44,21 +42,20 @@ import {
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
     MatCardModule,
     MatNativeDateModule,
     MatDatepickerModule,
     MatGridListModule,
-    MatListModule,
     MatTooltipModule,
     MatStepperModule,
     MatSnackBarModule,
-    MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
     MatSliderModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatBottomSheetModule,
+    MatListModule
   ]
 })
 

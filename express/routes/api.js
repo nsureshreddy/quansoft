@@ -11,6 +11,8 @@ var User = require("../models/user");
 var MasterSchedule = require("../models/masterSchedule");
 var MasterResource = require("../models/masterResource");
 
+var Vendor = require('../models/vendor');
+
 // Get All Users
 router.get('/users/:status', function(req, res) {
   var status = req.params.status;
@@ -217,6 +219,39 @@ router.post('/proposal', function(req, res) {
   newProposal.save(function(err) {
     res.json({msg: 'Successful created new user.'});
   });
+});
+
+// Vendor Registration
+router.post('/vendor', function(req, res) {
+  var vendor = Object.assign(new Vendor, req.body);
+  
+  vendor.save(function(err, vendor) {
+    if (!err) {
+        // Send an Email to Vendor
+        // with an authorization token to login
+        mail.notifyQuote(vendor);
+    }
+    res.json({error: err, data: vendor });
+  });
+
+});
+
+// Vendor Registration
+router.get('/vendor', function(req, res) {
+  Vendor.find({}, (err, vendors) => {
+    return res.json({ error: err, data: vendors });
+  });
+});
+
+router.get('/authorization/:token', function(req, res) {
+  var token = req.params.token;
+  try {
+    var user = jwt.verify(token, 'config.secret');
+    res.redirect('/dashboard/vendor');
+  } catch(e) {
+    return res.json({ error: e });
+  }
+
 });
 
 

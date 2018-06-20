@@ -50,48 +50,37 @@ var ProjectSchema = new Schema({
     required: true
   },
   location: {
-    type: String,
-    required: true
+    type: String
   },
   region: {
-    type: String,
-    required: true
+    type: String
   },
   stage: {
-    type: String,
-    required: true
+    type: String
   },
   type: {
-    type: String,
-    required: true
+    type: String
   },
   scope: {
-    type: Array,
-    required: true
+    type: Array
   },
   siteArea: {
-    type: Number,
-    required: true
+    type: Number
   },
   builtupArea: {
-    type: Number,
-    required: true
+    type: Number
   },
   startDate: {
-    type: Date,
-    required: true
+    type: Date
   },
   endDate: {
-    type: Date,
-    required: true
+    type: Date
   },
   numberOfBuildings: {
-    type: Number,
-    required: true
+    type: Number
   },
   numberOfFloors: {
-    type: Number,
-    required: true
+    type: Number
   },
   orderNumber: {
     type: Number
@@ -100,12 +89,10 @@ var ProjectSchema = new Schema({
     type: String
   },
   fsi: {
-    type: String,
-    required: true
+    type: String
   },
   participants: {
-    type: Array,
-    required: true
+    type: Array
   },
   paymentTerms: [{
     type: paymentTermsSchema,

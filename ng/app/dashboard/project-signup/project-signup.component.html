@@ -12,10 +12,10 @@
               <input matInput placeholder="Client Name" formControlName="client" required>
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Location" formControlName="location" required>
+              <input matInput placeholder="Location" formControlName="location">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Region" formControlName="region" required>
+              <input matInput placeholder="Region" formControlName="region">
             </mat-form-field>
             <div>
               <button mat-raised-button matStepperNext color="primary">Next</button>
@@ -26,26 +26,26 @@
           <ng-template matStepLabel>Project Details</ng-template>
           <form [formGroup]="orderForm">
             <mat-form-field>
-              <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate" required>
+              <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
               <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-              <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="endDate" required>
+              <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="endDate">
               <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
               <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Site Area" formControlName="siteArea" required>
+              <input matInput placeholder="Site Area" formControlName="siteArea">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Builtup Area" formControlName="builtupArea" required>
+              <input matInput placeholder="Builtup Area" formControlName="builtupArea">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="No. Of Buildings" formControlName="numberOfBuildings" required>
+              <input matInput placeholder="No. Of Buildings" formControlName="numberOfBuildings">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="No. Of Floors" formControlName="numberOfFloors" required>
+              <input matInput placeholder="No. Of Floors" formControlName="numberOfFloors">
             </mat-form-field>
             <div>
               <button mat-raised-button matStepperPrevious>Back</button>
@@ -57,7 +57,7 @@
           <ng-template matStepLabel>Scope Of Work</ng-template>
           <form [formGroup]="scopeForm">
             <mat-form-field>
-              <mat-select placeholder="Type" formControlName="type" required>
+              <mat-select placeholder="Type" formControlName="type">
                 <mat-option value="Residential">Residential</mat-option>
                 <mat-option value="Commercial">Commercial</mat-option>
                 <mat-option value="Institutional">Institutional</mat-option>
@@ -65,7 +65,7 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field>
-              <mat-select [disabled]="true" placeholder="Stage" formControlName="stage" required>
+              <mat-select [disabled]="true" placeholder="Stage" formControlName="stage">
                 <mat-option value="New">New</mat-option>
                 <mat-option value="Proposal">Proposal</mat-option>
                 <mat-option value="Execution">Execution</mat-option>
@@ -84,7 +84,7 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="FSI" formControlName="fsi" required>
+              <input matInput placeholder="FSI" formControlName="fsi">
             </mat-form-field>
             <mat-form-field>
               <mat-select placeholder="Participants" formControlName="participants" multiple>

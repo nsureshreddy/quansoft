@@ -17,7 +17,7 @@
 
 ::-webkit-scrollbar
 {
-	width: 12px;
+	width: 6px;
 	background-color: #F5F5F5;
 }
 
@@ -94,11 +94,34 @@ h1, h2, h3, h4, h5, h6 {
 .material-icons.link:hover {
   outline: none;
 }
+.p-a-xs {
+  padding: .25rem!important;
+}
 
+.b-b {
+  border-bottom: 1px solid rgba(120,130,140,.13);
+}
+.no-border {
+  border-color: transparent;
+  border-width: 0;
+}
+
+.no-bg {
+  background-color: transparent!important;
+}
+
+:focus {
+  outline: 0!important;
+}
+.p-t-0 {
+  padding-top: 0!important;
+}
 .p-t-4 {
   padding-top: 2rem;
 }
-
+.p-l-sm {
+  padding-left: .75rem;
+}
 .p-l-1 {
   padding-left: .5rem;
 }
@@ -121,7 +144,9 @@ h1, h2, h3, h4, h5, h6 {
 li {
   list-style-type: none;
 }
-
+.m-l {
+  margin-left: .5rem;
+}
 .m-t {
   margin-top: 1rem;
 }
@@ -140,7 +165,7 @@ li {
 
 .mat-form-field-wrapper {
   padding-bottom: .876rem;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .text-muted {
@@ -204,15 +229,15 @@ li {
 }
 
 .mat-step-label.mat-step-label-active.mat-step-label-selected {
-  color: #427ac7;
+  color: #3f51b5;
 }
 
 .mat-step-label-active {
-  color: #427ac7;
+  color:#3f51b5;
 }
 
 .mat-step-icon {
-  background-color: #427ac7!important;
+  background-color: #3f51b5!important;
 }
 
 .spinner {
@@ -286,7 +311,7 @@ li {
 }
 
 .mat-table .mat-header-row {
-  background-color: #427ac7;
+  background-color: #3f51b5;
   min-height: 32px;
 }
 
@@ -296,13 +321,13 @@ li {
 }
 
 .brand {
-  padding: .85rem 1.875rem;
-  background-color: #427ac7;
+  padding: .875rem 1.875rem;
+  background-color: #3f51b5;
   border-bottom: 1px solid #fff;
 }
 
 .app-toolbar {
-  background-color: #427ac7;
+  background-color: #3f51b5;
   color: #fff;
 }
 

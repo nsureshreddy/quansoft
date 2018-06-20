@@ -3,6 +3,9 @@
   margin: 0 auto;
   text-align: center;
 }
+.first-project-msg img{
+  width: 50%;
+}
 
 .add-another {
   position: fixed;

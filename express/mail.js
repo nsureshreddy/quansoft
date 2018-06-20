@@ -1,4 +1,5 @@
 var nodemailer = require('nodemailer');
+var jwt = require('jsonwebtoken');
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -9,11 +10,18 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-  from: 'sureshreddy.ns@gmail.com',
-  to: 'n.sureshreddy@yahoo.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
+  from: 'sureshreddy.ns@gmail.com'
 };
+
+var sendMail = function (mailOptions) {
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+}
 
 module.exports = {
   sendWelcome: function (user) {
@@ -39,15 +47,31 @@ module.exports = {
       Best,
 
       Karthik
-      Co-Founder, Product Owner at QuanSoft
+      Founder, Product Owner at QuanSoft
     `
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
+    sendMail(mailOptions);
+  },
+
+  notifyQuote: function (vendor) {
+    var authToken = jwt.sign({email: vendor.email, type: 'vendor'}, 'config.secret');
+    mailOptions.to = vendor.email;
+    mailOptions.subject = 'Welcome To QuanSoft';
+    mailOptions.html = `
+      Hi ${vendor.organization},
+
+      Great to have you onboard!
+
+      To set up a time to connect
+      Please Click <a href="http://localhost:3000/auth/${authToken}">Here </a> to login and see tendor details.
+
+
+      Best,
+
+      Karthik
+      Founder, Product Owner at QuanSoft
+    `
+    sendMail(mailOptions);
   }
+  
 };

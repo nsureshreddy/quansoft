@@ -18,7 +18,7 @@ export class CostEstimatesComponent implements OnInit {
   masters: MasterSchedule[] = [];
   chipList: any = [];
   dialogConfig: any = { };
-  columnBackground: string = '#427ac7';
+  columnBackground: string = '#3f51b5';
   columnTextColor: string = '#fff';
   tiles = [
     {text: 'Cost Code', cols: 1, rows: 1},

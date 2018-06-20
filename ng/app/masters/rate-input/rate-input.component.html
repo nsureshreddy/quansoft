@@ -75,7 +75,7 @@
       <div>
         <span class="flex-spacer"></span>
         <small class="text-muted">Overhead & Profile Margin ({{activity.profitMargin}}%)</small>
-        <mat-slider (change)="calculateRatePerUnit()" [max]="100" [min]="0" [step]="1" [thumb-label]="true" [tick-interval]="1" [(ngModel)]="activity.profitMargin"></mat-slider>
+        <mat-slider (change)="calculateRatePerUnit()" [max]="100" [min]="0" [step]="1" [(ngModel)]="activity.profitMargin"></mat-slider>
       </div>
       <div>
         <span class="_600">Calculated Rate/Unit: </span> {{activity.ratePerUnit}}

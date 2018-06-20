@@ -13,7 +13,7 @@
       <ul>
         <li [ngClass]="{'active':index==activeIndex}" *ngFor="let tab of tabs; let index = index;">
           <a routerLink="{{tab.link}}">
-            <i class="material-icons">{{tab.icon}}</i>
+            <i class="material-icons block">{{tab.icon}}</i>
             <span>{{tab.label}}</span>
           </a>
         </li>

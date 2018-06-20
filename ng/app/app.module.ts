@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AngularMaterialModule } from './angular-material.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { routing } from './app.routing';
-import { HttpClientModule } from '@angular/common/http';
+
 import { ProposalsComponent } from './dashboard/proposals/proposals.component';
 import { ProjectSignupComponent } from './dashboard/project-signup/project-signup.component';
 import { ProposalComponent } from './dashboard/proposal/proposal.component';
@@ -22,9 +23,8 @@ import { ProjectDetailComponent } from './dashboard/project-detail/project-detai
 import { PriceScheduleComponent } from './dashboard/price-schedule/price-schedule.component';
 import { PaymentTermsComponent } from './dashboard/payment-terms/payment-terms.component';
 import { TermsConditionsComponent } from './dashboard/terms-conditions/terms-conditions.component';
-import { AppPipesModule } from './app-pipes/app-pipes.module';
-import { ProposalService } from './services/proposal.service';
-import { MastersService } from './services/masters.service';
+import { QuantityInputComponent } from './dashboard/quantity-input/quantity-input.component';
+
 import { MastersComponent } from './masters/masters.component';
 import { ResourceMastersComponent } from './masters/resource-masters.component';
 import { MachineriesCostsComponent } from './masters/machineries-costs/machineries-costs.component';
@@ -34,9 +34,15 @@ import { MasterSchedulesComponent } from './masters/master-schedules/master-sche
 import { BillDetailComponent } from './masters/bill-detail/bill-detail.component';
 import { RateInputComponent } from './masters/rate-input/rate-input.component';
 import { NewMasterComponent } from './masters/new-master/new-master.component';
-import { QuantityInputComponent } from './dashboard/quantity-input/quantity-input.component';
+import { SortBottomSheet } from './vendors/vendors.component';
+import { AppPipesModule } from './app-pipes/app-pipes.module';
+
+import { ProposalService } from './services/proposal.service';
+import { MastersService } from './services/masters.service';
 import { AlwaysAuthGuard } from './services/authguard';
 import { LoginService } from './services/login.service';
+import { VendorsService } from './services/vendors.service';
+import { VendorsComponent } from './vendors/vendors.component';
 
 @NgModule({
   
@@ -74,20 +80,24 @@ import { LoginService } from './services/login.service';
     CostEstimatesComponent,
     ProjectDetailComponent,
     QuantityInputComponent,
+    SortBottomSheet,
     RateInputComponent,
     TermsConditionsComponent,
     PaymentTermsComponent,
+    VendorsComponent,
   ],
   providers: [
     ProposalService,
     MastersService,
+    VendorsService,
     LoginService,
     AlwaysAuthGuard
   ],
   entryComponents: [
     NewMasterComponent,
     RateInputComponent,
-    QuantityInputComponent
+    QuantityInputComponent,
+    SortBottomSheet
     
   ],
   bootstrap:    [ AppComponent ]

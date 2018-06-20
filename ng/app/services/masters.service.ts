@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { forkJoin } from "rxjs/observable/forkJoin";
+import { forkJoin } from "rxjs";
 
 import * as XLSX from 'xlsx';
 import * as Handsontable from 'handsontable';
