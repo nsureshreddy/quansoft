@@ -1,124 +1,13 @@
 <mat-drawer-container class="vendors-container">
   <mat-drawer mode="side" opened="true">
-    <div>
-      <div class="p-a-xs b-b">
-        <div class="input-group">
-          <span matPrefix>
-            <i class="material-icons v-a-m">search</i>&nbsp;</span>
-          <input matPrefix="search" type="text" class="form-control no-border no-bg" [(ngModel)]="searchTerm" placeholder="Search All Vendors">
-        </div>
-      </div>
-      <div class="vendors-list">
-        <div *ngFor="let vendor of vendors | search:searchTerm" (click)="detail(vendor)" class="list-item pointer b-b">
-          <div class="list-left">
-            <mat-checkbox [(ngModel)]="bulkActions"></mat-checkbox>
-          </div>
-          <div class="list-body">
-            {{vendor.organization}}
-            <small class="block text-muted">{{vendor.city}}</small>
-            <small class="block text-muted">Estd.: {{vendor.established}}</small>
-            <small class="block text-muted">Turnover: {{vendor.annualTurnover}}</small>
-          </div>
-        </div>
-      </div>
-      <div class="text-center">
-        <div class="p-a-xs input-group">
-          <button mat-raised-button (click)="openBottomSheet()" class="pull-left">
-            <i class="material-icons">swap_vert</i> Sort
-          </button>
-          <button class="mat-raised-button mat-primary" (click)="newVendor()" >
-              <i class="material-icons v-a-m">add</i> New Vendor</button>
-        </div>
-      </div>
-    </div>
+    <ul class='nav-menu'>
+      <li *ngFor="let tab of tabs; let index=index;" [ngClass]="{'active':index==activeIndex}" routerLink="{{tab.link}}">
+          {{tab.label}}
+          <span *ngIf="tab.notifications" matBadge="3" matBadgeColor="warn" matBadgeOverlap="false"></span>
+      </li>
+    </ul>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="vendors-content padding">
-      <div *ngIf="vendorSignup">
-        <h2 class="n-m">New Vendor Registration</h2>
-        <div class="vendor-registration">
-          <form (ngSubmit)="signup(signupForm)" #signupForm="ngForm">
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.organization" name="organization" placeholder="Organization/Business" required>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.firstName" name="firstName" placeholder="First Name">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.lastName" name="lastName" placeholder="Last Name">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.contactName" name="contactName" placeholder="Contact Name">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.phone" name="phone" placeholder="Phone">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.email" name="email" placeholder="Email">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.established" name="established" placeholder="Year Of Establishment">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.annualTurnover" name="annualTurnover" placeholder="Annual Turnover">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.address" name="address" placeholder="Address">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.city" name="city" placeholder="City">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.state" name="state" placeholder="State">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.zipcode" name="zipcode" placeholder="Zip Code">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput [(ngModel)]="vendor.country" name="country" placeholder="Country">
-            </mat-form-field>
-            <div>
-              <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
-              <button mat-raised-button color="primary" type="submit">Save</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div *ngIf="selectedVendor">
-        <h2 class="n-m p-l-sm">
-          <span>{{selectedVendor.organization}}</span>
-          <span class="pull-right">
-            <i matTooltip="Edit" class="material-icons link">edit</i>
-            <i matTooltip="Send Quote" class="material-icons link m-l">mail</i>
-          </span>
-        </h2>
-        <div class="row m-b m-t">
-          <div class="col-6">
-            <small class="text-muted">Estd.</small>
-            <div class="_500">{{selectedVendor.established}}</div>
-          </div>
-          <div class="col-6">
-            <small class="text-muted">Annual Turnover</small>
-            <div class="_500">{{selectedVendor.annualTurnover}}</div>
-          </div>
-        </div>
-        <div class="row m-b">
-          <div class="col-6">
-            <small class="text-muted">Email</small>
-            <div class="_500">{{selectedVendor.email}}</div>
-          </div>
-          <div class="col-6">
-            <small class="text-muted">Phone</small>
-            <div class="_500">{{selectedVendor.phone}}</div>
-          </div>
-        </div>
-        <div class="row m-b">
-          <div class="col-12">
-            <small class="text-muted">Address</small>
-            <div>{{selectedVendor.address}}, {{selectedVendor.city}}, {{selectedVendor.state}}, {{selectedVendor.zipcode}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

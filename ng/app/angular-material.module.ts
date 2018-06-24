@@ -24,8 +24,10 @@ import {
   MatAutocompleteModule,
   MatSliderModule,
   MatExpansionModule,
-  MatBottomSheetModule,
-  MatListModule
+  MatListModule,
+  MatSortModule,
+  MatChipsModule,
+  MatBadgeModule
 } from '@angular/material';
 
 @NgModule({
@@ -54,8 +56,10 @@ import {
     MatSliderModule,
     MatExpansionModule,
     MatTableModule,
-    MatBottomSheetModule,
-    MatListModule
+    MatSortModule,
+    MatListModule,
+    MatChipsModule,
+    MatBadgeModule
   ]
 })
 

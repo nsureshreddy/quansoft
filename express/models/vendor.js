@@ -15,9 +15,6 @@ var VendorSchema = new Schema({
   phone: {
     type: Number
   },
-  contactName: {
-    type: String
-  },
   email: {
     type: String
   },

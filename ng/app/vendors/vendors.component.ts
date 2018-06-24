@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Vendor } from '../app-models/Vendor';
-import { MatSnackBar } from '@angular/material';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
-import { VendorsService } from '../services/vendors.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-vendors',
@@ -10,74 +7,25 @@ import { VendorsService } from '../services/vendors.service';
   styleUrls: ['./vendors.component.css']
 })
 export class VendorsComponent implements OnInit {
-  vendor: Vendor;
-  vendorSignup: boolean;
-  vendors: Vendor[] = [];
-  selectedVendor: Vendor;
+  activeIndex = 0;
+  tabs: any[] = [
+    {link: '/vendors/list', label: 'Vendors List', icon: 'dashboard' },
+    {link: '/vendors/send-quote', label: 'Send Quote', icon: 'book' },
+    {link: '/vendors/quotations', label: 'Quotations', notifications: true }
+  ];
 
-  constructor(private vendorsService: VendorsService, private bottomSheet: MatBottomSheet, public snackBar: MatSnackBar) { }
-
-  ngOnInit() {
-    this.getVendors();
-  }
-
-  getVendors() {
-    this.vendorsService.getVendors().subscribe(resp => {
-      if (resp && !resp['error']) {
-        this.vendors = resp['data'];
-      }   
-    });
-  }
-
-  openBottomSheet(): void {
-    let bottomSheet = this.bottomSheet.open(SortBottomSheet);
-    bottomSheet.afterDismissed().subscribe(result=>{
-      this.vendors.sort(function(a,b){
-        if(a[result] > b[result]){
-          return -1;
-        } else {
-          return 1;
-        }
-      });
-    });
-  }
-
-  detail(vendor: Vendor) {
-    this.vendorSignup = false;
-    this.selectedVendor = vendor;
-  }
-
-  signup() {
-    this.vendorsService.signup(this.vendor).subscribe(resp => {
-      if (resp && !resp['error']) {
-        this.snackBar.open('Vendor Registration Completed.', 'Dismiss', {});
-        this.vendorSignup = false;
-        this.vendors.push(resp['data']);
+  constructor(private router: Router) {
+    router.events.subscribe(val =>  {
+      if(val instanceof NavigationEnd) {
+        let index = this.tabs.findIndex(i => {
+          return val.urlAfterRedirects.indexOf(i.link)===0;
+        });
+        this.activeIndex = index;
       }
     });
   }
 
-  newVendor() {
-    this.selectedVendor = null;
-    this.vendor = new Vendor();
-    this.vendorSignup = true;
+  ngOnInit() {
   }
 
-  cancel() {
-    this.vendorSignup = false;
-  }
-
-}
-
-@Component({
-  selector: 'sort-bottom-sheet',
-  templateUrl: './sort-bottom-sheet.html',
-})
-export class SortBottomSheet {
-  constructor(private bottomSheetRef: MatBottomSheetRef<SortBottomSheet>) {}
-
-  sortBy(field: String): void {
-    this.bottomSheetRef.dismiss(field);
-    event.preventDefault();
-  }
 }

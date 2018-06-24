@@ -236,6 +236,9 @@ router.post('/vendor', function(req, res) {
 
 });
 
+router.post('/submit-tendor', function (req, res) {
+});
+
 // Vendor Registration
 router.get('/vendor', function(req, res) {
   Vendor.find({}, (err, vendors) => {

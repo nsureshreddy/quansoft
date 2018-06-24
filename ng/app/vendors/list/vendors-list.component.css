@@ -1,0 +1,104 @@
+.vendors-container {
+    min-height: calc(100vh - 56px);
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.vendors-container .mat-drawer {
+    width: 252px;
+    overflow: hidden;
+}
+
+.vendors-container .mat-drawer .list-item {
+    display: block;
+    position: relative;
+    padding: 12px 16px;
+    background-color: rgba(0,0,0,.035);
+}
+
+.vendors-container .mat-drawer .list-item .list-left {
+    float: left;
+    padding-right: 1rem;
+    margin-top: 4px;
+}
+.vendors-list {
+    max-height: calc(100vh - 154px);
+    min-height: calc(100vh - 154px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.vendors-list small {
+    font-size: 12px;
+}
+.w-40 {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+}
+.avatar img {
+    width: 100%;
+}
+
+.list-left+.list-body {
+    margin-left: 36px;
+}
+
+.text-muted {
+    color: inherit!important;
+    opacity: .6;
+}
+
+.input-group {
+    padding: .5rem;
+    margin-bottom: 3px;
+}
+.input-group .form-control {
+    display: table-cell;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 0;
+    line-height: 1.25;
+    color: #55595c;
+    background-image: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    width: calc(100% - 33px);
+}
+.vendors-table .mat-header-row {
+    height: 2rem;
+}
+.vendors-table .mat-row {
+    height: 2.5rem;
+}
+.vendors-table .mat-header-row th {
+    font-size: .875rem;
+}
+.vendors-table .mat-header-row th .mat-checkbox-frame {
+    border-color: #fff!important;
+}
+
+.mat-checkbox-inner-container {
+    height: 1rem;
+    width: 1rem;
+}
+
+.example-full-width {
+    width: 49%;
+}
+
+.example-full-width .mat-form-field-wrapper {
+    font-size: 14px!important;
+}
+.vendors-container .mat-drawer {
+    border-right: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }

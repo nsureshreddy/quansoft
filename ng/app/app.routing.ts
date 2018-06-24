@@ -19,6 +19,9 @@ import { MasterSchedulesComponent } from './masters/master-schedules/master-sche
 import { BillDetailComponent } from './masters/bill-detail/bill-detail.component';
 import { AlwaysAuthGuard } from './services/authguard';
 import { VendorsComponent } from './vendors/vendors.component';
+import { VendorsListComponent } from './vendors/list/vendors-list.component';
+import { SendQuoteComponent } from './vendors/send-quote/send-quote.component';
+import { QuotationsComponent } from './vendors/quotations/quotations.component';
 
 
 const appRoutes: Routes = [
@@ -61,7 +64,13 @@ const appRoutes: Routes = [
       },
       {
         path: 'vendors',
-        component: VendorsComponent
+        component: VendorsComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          { path: 'list', component: VendorsListComponent, pathMatch: 'full' },
+          { path: 'send-quote', component: SendQuoteComponent, pathMatch: 'full' },
+          { path: 'quotations', component: QuotationsComponent, pathMatch: 'full' },
+        ]
       },
       {
         path: 'cost-estimates',

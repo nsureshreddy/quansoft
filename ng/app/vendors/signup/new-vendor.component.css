@@ -1,0 +1,13 @@
+.full-width {
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+  padding-left: 8px;
+}
+.close {
+  background-color: inherit;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

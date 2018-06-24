@@ -6,7 +6,6 @@ export class Vendor {
   organization: string;
   established: number;
   annualTurnover: number;
-  contactName: string;
   address: string;
   city: string;
   state: string;

@@ -34,7 +34,6 @@ import { MasterSchedulesComponent } from './masters/master-schedules/master-sche
 import { BillDetailComponent } from './masters/bill-detail/bill-detail.component';
 import { RateInputComponent } from './masters/rate-input/rate-input.component';
 import { NewMasterComponent } from './masters/new-master/new-master.component';
-import { SortBottomSheet } from './vendors/vendors.component';
 import { AppPipesModule } from './app-pipes/app-pipes.module';
 
 import { ProposalService } from './services/proposal.service';
@@ -43,6 +42,10 @@ import { AlwaysAuthGuard } from './services/authguard';
 import { LoginService } from './services/login.service';
 import { VendorsService } from './services/vendors.service';
 import { VendorsComponent } from './vendors/vendors.component';
+import { NewVendorComponent } from './vendors/signup/new-vendor.component';
+import { VendorsListComponent } from './vendors/list/vendors-list.component';
+import { SendQuoteComponent } from './vendors/send-quote/send-quote.component';
+import { QuotationsComponent } from './vendors/quotations/quotations.component';
 
 @NgModule({
   
@@ -80,11 +83,14 @@ import { VendorsComponent } from './vendors/vendors.component';
     CostEstimatesComponent,
     ProjectDetailComponent,
     QuantityInputComponent,
-    SortBottomSheet,
     RateInputComponent,
     TermsConditionsComponent,
     PaymentTermsComponent,
     VendorsComponent,
+    VendorsListComponent,
+    SendQuoteComponent,
+    QuotationsComponent,
+    NewVendorComponent
   ],
   providers: [
     ProposalService,
@@ -97,8 +103,7 @@ import { VendorsComponent } from './vendors/vendors.component';
     NewMasterComponent,
     RateInputComponent,
     QuantityInputComponent,
-    SortBottomSheet
-    
+    NewVendorComponent
   ],
   bootstrap:    [ AppComponent ]
 })

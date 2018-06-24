@@ -49,6 +49,9 @@ h1, h2, h3, h4, h5, h6 {
 ._600 {
   font-weight: 600;
 }
+.text-sm {
+  font-size: .875rem;
+}
 .text-center {
   text-align: center;
 }
@@ -145,7 +148,10 @@ li {
   list-style-type: none;
 }
 .m-l {
-  margin-left: .5rem;
+  margin-left: 1rem!important;
+}
+.m-r {
+  margin-right: 1rem!important;
 }
 .m-t {
   margin-top: 1rem;
@@ -272,7 +278,9 @@ li {
 		transform: rotate(360deg);
 	}
 }
-
+.w-full {
+  width: 100%;
+}
 .remove {
   cursor: pointer;
   color: #cc0000;
@@ -305,6 +313,13 @@ li {
   width: 80vw;
   min-height: 480px;
 }
+
+.mat-dialog-container .mat-toolbar-multiple-rows,
+.mat-dialog-container .mat-toolbar-row {
+  height: 48px;
+  min-height: 48px;
+}
+
 .mat-dialog-container .mat-toolbar-row .mat-button {
   color: #fff;
   background-color: #3f51b5;
@@ -362,3 +377,13 @@ a {
   text-decoration: none;
 }
 
+.vendors-table .mat-header-row th .mat-checkbox-frame {
+  border-color: #fff!important;
+  height: 1rem;
+  width: 1rem;
+}
+
+.vendors-table .mat-row .mat-checkbox-inner-container {
+  height: 1rem;
+  width: 1rem;
+}
