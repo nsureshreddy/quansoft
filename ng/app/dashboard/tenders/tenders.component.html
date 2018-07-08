@@ -1,0 +1,13 @@
+<mat-drawer-container class="tenders-container">
+  <mat-drawer mode="side" opened="true">
+    <ul class='nav-menu'>
+      <li *ngFor="let tab of tabs; let index=index;" [ngClass]="{'active':index==activeIndex}" routerLink="{{tab.link}}">
+        {{tab.label}}
+        <span *ngIf="tab.notifications" matBadge="1" matBadgeColor="warn" matBadgeOverlap="false"></span>
+      </li>
+    </ul>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

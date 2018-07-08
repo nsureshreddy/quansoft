@@ -1,0 +1,9 @@
+.quote-header {
+    padding: .7rem;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #ccc;
+}
+.quote-items {
+    border-bottom: 1px solid #ccc;
+    padding: 0 .5rem;   
+}

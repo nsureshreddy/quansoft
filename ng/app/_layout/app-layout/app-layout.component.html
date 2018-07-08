@@ -11,26 +11,29 @@
     </div>
     <nav class="left-nav">
       <ul>
-        <li [ngClass]="{'active':index==activeIndex}" *ngFor="let tab of tabs; let index = index;">
-          <a routerLink="{{tab.link}}">
-            <i class="material-icons block">{{tab.icon}}</i>
-            <span>{{tab.label}}</span>
-          </a>
-        </li>
+        <ng-container *ngFor="let tab of tabs; let index = index;">
+          <li [ngClass]="{'active':index==activeIndex}" *ngIf="tab.canAccess">
+            <a routerLink="{{tab.link}}">
+              <i class="material-icons block">{{tab.icon}}</i>
+              <span>{{tab.label}}</span>
+            </a>
+          </li>
+        </ng-container>
       </ul>
     </nav>
   </mat-drawer>
   <mat-toolbar class="app-toolbar">
     <mat-toolbar-row>
-      <p class="brand-name p-l-1">QUANSOFT</p>
+      <p class="brand-name">QUANSOFT</p>
       <div class="flex-spacer"></div>
       <ul class="right-nav">
         <li>
-          <i *ngIf="newUsers.length>0" class="material-icons badge" data-badge="1" [matMenuTriggerFor]="notifiications">notifications</i>
-          <i *ngIf="newUsers.length==0" class="material-icons" [matMenuTriggerFor]="notifiications">notifications</i>
+          <i class="v-a-m material-icons" [matMenuTriggerFor]="notifiications">notifications</i>
         </li>
-        <li class="user-name" [matMenuTriggerFor]="menu">
-          <span>{{user?.name}}</span>
+        <li class="user-name" *ngIf="user" [matMenuTriggerFor]="menu">
+          <span>{{user.name}}</span>
+          <span *ngIf="!user.name">{{user.email}}</span>
+          <span class="designation">{{user?.designation}}</span>
         </li>
       </ul>
       <mat-menu #notifiications="matMenu" [overlapTrigger]="false">

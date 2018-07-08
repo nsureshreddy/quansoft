@@ -1,0 +1,29 @@
+<div>
+  <h3 class="quote-header n-m">
+    <a routerLink="/vendors/quotations">Quotations</a> >> {{project?.name}}</h3>
+  <div class="text-sm" *ngIf="quotation">
+    <mat-grid-list cols="11" rowHeight="32px">
+      <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="columnBackground"
+        [style.color]="columnTextColor">
+        {{tile.text}}
+      </mat-grid-tile>
+    </mat-grid-list>
+    <ng-container>
+      <mat-grid-list class="quote-items" cols="11" rowHeight="100px" *ngFor="let bill of quotation.bills">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">{{bill.costCode}}</mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">{{bill.costCentre}}</mat-grid-tile>
+        <mat-grid-tile [colspan]="9" [rowspan]="1"></mat-grid-tile>
+        <ng-container *ngFor="let activity of bill.activities">
+          <mat-grid-tile [colspan]="2" [rowspan]="1"></mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.code}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.shortDescription}}</mat-grid-tile>
+          <mat-grid-tile class="activity-description" [colspan]="2" [rowspan]="1">{{activity.description}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.uom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.quantity}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.rate}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.rate* activity.quantity}}</mat-grid-tile>
+        </ng-container>
+      </mat-grid-list>
+    </ng-container>
+  </div>
+</div>

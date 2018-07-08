@@ -73,9 +73,9 @@ export class VendorsListComponent implements OnInit {
     });
   }
 
-  sendQuote() {
+  sendTender() {
     this.vendorsService.setSelectedVendors(this.selection.selected);
-    this.router.navigate(['vendors/send-quote']);
+    this.router.navigate(['vendors/send-tender']);
   }
 
   decorateTable() {

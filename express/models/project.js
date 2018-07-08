@@ -1,5 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+require("../models/masterSchedule").MasterBill;
+var masterBillSchema = require('mongoose').model('MasterBill').schema
+
+var costEstimatesSchema = Schema({
+  vendor: String,
+  bills:[{
+    type: masterBillSchema,
+    ref: 'MasterBill'
+  }]
+});
+
+mongoose.model('CostEstimates', costEstimatesSchema);
 
 var termsAndCondtionsSchema = Schema({
   duration: {
@@ -102,6 +114,14 @@ var ProjectSchema = new Schema({
     type: termsAndCondtionsSchema,
     ref: 'TermsAndCondtions'
   },
+  costEstimates: {
+    type: costEstimatesSchema,
+    ref: 'CostEstimates'
+  },
+  quotations: [{
+    type: costEstimatesSchema,
+    ref: 'CostEstimates'
+  }],
   scopeItems: [{
     name: String,
     workItems: [

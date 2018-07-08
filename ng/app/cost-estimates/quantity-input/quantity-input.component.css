@@ -1,0 +1,9 @@
+input[type=file] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+label[for=input-file-id] {
+    margin-left: 8px;
+}

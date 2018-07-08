@@ -9,4 +9,8 @@ export class LoginService {
   getSession(token) {
     return this.http.post('/api/session', {token: token});
   }
+
+  authenticate(token) {
+    return this.http.get('/api/auth/' + token);
+  }
 }

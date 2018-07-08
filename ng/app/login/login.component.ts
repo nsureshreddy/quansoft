@@ -26,17 +26,10 @@ export class LoginComponent {
     }
     this.http.post('/api/signin',this.user).subscribe(resp => {
       localStorage.setItem('session-token', resp['token']);
-      this.router.navigate(['dashboard']);
-      this.getNewUsers();
+      this.router.navigate(['dashboard/proposal']);
     }, err => {
       this.loginError = true;
       form.resetForm();
-    });
-  }
-
-  getNewUsers() {
-    this.http.get('/api/users/NEW').subscribe(resp => {
-      localStorage.setItem('new-users', JSON.stringify(resp));
     });
   }
 

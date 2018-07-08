@@ -7,6 +7,7 @@ import * as XLSX from 'xlsx';
 import * as Handsontable from 'handsontable';
 
 import { MasterSchedule } from "../app-models/masterSchedule";
+import { CostEstimates } from "../app-models/CostEstimates";
 
 @Injectable()
 export class MastersService {
@@ -56,6 +57,10 @@ export class MastersService {
     return this.http.delete('/api/master-schedule/' + id);
   }
 
+  submitCostEstimates(estimates: CostEstimates) {
+    return this.http.post('/api/cost-estimates', estimates);
+  }
+
   readFile(event) {
     let promise = new Promise((resolve, reject) => {
       let data;
@@ -94,7 +99,6 @@ export class MastersService {
   }
 
   loadHandOnTable(self, element) {
-    var hotElementContainer = element.parentNode;
     var hotSettings = {
       afterChange: (data) => {
         self.onResourceUpdate(data);
@@ -102,7 +106,7 @@ export class MastersService {
       beforeRemoveRow: (data) => {
         self.removeResource(data);
       },
-      minSpareRows: 1,
+      minSpareRows: self.resources.length==0 ? 1:0 ,
       columnSorting: true,
       sortIndicator: true,
       data: self.resources,

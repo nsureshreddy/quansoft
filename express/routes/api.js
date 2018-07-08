@@ -8,7 +8,7 @@ var Project = require("../models/project");
 var Proposal = require("../models/proposal");
 
 var User = require("../models/user");
-var MasterSchedule = require("../models/masterSchedule");
+var MasterSchedule = require("../models/masterSchedule").MasterSchedule;
 var MasterResource = require("../models/masterResource");
 
 var Vendor = require('../models/vendor');
@@ -33,6 +33,36 @@ router.post('/session', function (req,res) {
   var user = jwt.verify(token, 'config.secret');
   delete user.password;
   return res.json(user);
+});
+
+router.get('/auth/:token', function(req, res) {
+  var token = req.params.token;
+  try {
+    var tokenValue = jwt.verify(token, 'config.secret');
+    var newPassword = generatePassword();
+    switch(tokenValue.et) {
+      case 1.03:
+      var newUser = Object.assign(new User, {email: tokenValue.email, password: newPassword, designation: 'vendor', userId: tokenValue.email});
+      break;
+    }
+    newUser.save(function(err) {
+      User.findOne({
+        userId: newUser.userId
+      }, function (err, user) {
+        if (err) throw err;
+        user.comparePassword(newPassword, function (err, isMatch) {
+          if (isMatch && !err) {
+            var token = jwt.sign(user.toJSON(), 'config.secret');
+            res.json({ success: true, user: user, token:  token });
+          } else {
+            res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.', error:err });
+          }
+        });
+      });
+    });
+  } catch(e) {
+    return res.json({ error: e });
+  }
 });
 
 // User Signup
@@ -85,7 +115,7 @@ router.post('/signin', function (req, res) {
 });
 
 // Get All Projects
-router.get('/projects', function(req, res) {
+router.get('/proposals', function(req, res) {
   Project.find({}, function(err, projects) {
     if (err) {
       return res.json({success: false, msg: err});
@@ -115,6 +145,19 @@ router.post('/project-signup', function(req, res) {
     res.json({success: true, msg: 'Project created successfully.'});
   });
 });
+
+router.put('/update-project', (req, res) => {
+  var project = new Project(req.body);
+  
+  Project.update({ jobId: project.jobId+"" }, { $set: { costEstimates: project.costEstimates }},
+    function(err) {
+      if (err) {
+        return res.json({error: err});
+      }
+      res.json({success: true, msg: 'Cost Estimates Updated.'});
+  });
+});
+
 
 // Update Terms and Condtions of a Project
 router.post('/project/update-terms/:jobId', function(req, res) {
@@ -236,8 +279,38 @@ router.post('/vendor', function(req, res) {
 
 });
 
+
 router.post('/submit-tendor', function (req, res) {
+  try {
+    var jobId = req.body.jobId;
+    mail.sendTendor(jobId, req.body.vendors);
+    res.json({data: 'Success' });    
+  } catch(e) {
+    res.json({error: e });
+  }
 });
+
+router.post('/submit-quote', function (req, res) {
+  try {
+    var jobId = req.body.jobId;
+    var costEstimates = req.body.estimates;
+    Project.update(
+      { jobId: jobId }, 
+      { $push: { quotations: costEstimates } },
+      function(err, count) {
+        if (err) return next(err);
+        res.json({updated: count});
+    }
+    );
+  
+  } catch(e) {
+    res.json({error:e});
+  }
+});
+
+router.post('/quotations', function (req, res) {
+  
+})
 
 // Vendor Registration
 router.get('/vendor', function(req, res) {
@@ -246,16 +319,17 @@ router.get('/vendor', function(req, res) {
   });
 });
 
-router.get('/authorization/:token', function(req, res) {
-  var token = req.params.token;
-  try {
-    var user = jwt.verify(token, 'config.secret');
-    res.redirect('/dashboard/vendor');
-  } catch(e) {
-    return res.json({ error: e });
+function generatePassword() {
+  var pass = '';
+  while (pass.length < 10) {
+    var i = Math.round(Math.random() * 200);
+    if ((i >= 65 && i < 91) || (i >= 97 && i < 123) || (i >= 48 && i < 58)) {
+      pass += String.fromCharCode(i);
+    }
   }
+  return pass;
+}
 
-});
 
 
 module.exports = router;

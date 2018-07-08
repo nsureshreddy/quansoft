@@ -1,0 +1,33 @@
+.nav-menu {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-menu li {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #fff;
+    cursor: pointer;
+  }
+  .nav-menu li.active,
+  .nav-menu li:hover {
+    background-color: #3f51b5;
+    color: #fff;
+  }
+  .nav-menu li.active
+  .nav-menu li a:hover {
+    color: #fff;
+  }
+
+  .tenders-container {
+    min-height: calc(100vh - 56px);
+    background-color: #fff;
+    font-size: 14px;
+  }
+    
+  .tenders-container .mat-drawer {
+    width: 216px;
+    overflow: hidden;
+    border-right: 1px solid #ccc;
+  }
+    

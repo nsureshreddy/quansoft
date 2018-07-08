@@ -27,8 +27,10 @@ app.use('/', express.static(dist));
 app.use('/login', express.static(dist));
 app.use('/dashboard/*', express.static(dist));
 app.use('/masters/*', express.static(dist));
+app.use('/cost-estimates/*', express.static(dist));
 app.use('/vendors/*', express.static(dist));
 app.use('/settings/*', express.static(dist));
+app.use('/auth/*', express.static(dist));
 app.use('/api', api);
 
 // catch 404 and forward to error handler

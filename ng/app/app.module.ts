@@ -18,12 +18,13 @@ import { routing } from './app.routing';
 import { ProposalsComponent } from './dashboard/proposals/proposals.component';
 import { ProjectSignupComponent } from './dashboard/project-signup/project-signup.component';
 import { ProposalComponent } from './dashboard/proposal/proposal.component';
-import { CostEstimatesComponent } from './dashboard/cost-estimates/cost-estimates.component';
+import { CostEstimatesComponent } from './cost-estimates/cost-estimates.component';
+import { QuantityInputComponent } from './cost-estimates/quantity-input/quantity-input.component';
+
 import { ProjectDetailComponent } from './dashboard/project-detail/project-detail.component';
 import { PriceScheduleComponent } from './dashboard/price-schedule/price-schedule.component';
 import { PaymentTermsComponent } from './dashboard/payment-terms/payment-terms.component';
 import { TermsConditionsComponent } from './dashboard/terms-conditions/terms-conditions.component';
-import { QuantityInputComponent } from './dashboard/quantity-input/quantity-input.component';
 
 import { MastersComponent } from './masters/masters.component';
 import { ResourceMastersComponent } from './masters/resource-masters.component';
@@ -44,8 +45,17 @@ import { VendorsService } from './services/vendors.service';
 import { VendorsComponent } from './vendors/vendors.component';
 import { NewVendorComponent } from './vendors/signup/new-vendor.component';
 import { VendorsListComponent } from './vendors/list/vendors-list.component';
-import { SendQuoteComponent } from './vendors/send-quote/send-quote.component';
+import { SendTenderComponent } from './vendors/send-tender/send-tender.component';
 import { QuotationsComponent } from './vendors/quotations/quotations.component';
+import { CostEstimatesListComponent } from './cost-estimates/list/cost-estimates-list.component';
+import { CostEstimatesProposalComponent, DynamicDatabase } from './cost-estimates/proposal/cost-estimates-proposal.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { TendersComponent } from './dashboard/tenders/tenders.component';
+import { TendersListComponent } from './dashboard/tenders/tenders-list/tenders-list.component';
+import { SendQuoteComponent } from './dashboard/tenders/send-quote/send-quote.component';
+import { UserService } from './services/user.service';
+import { ViewQuoteComponent } from './vendors/view-quotation/view-quote.component';
+import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.component';
 
 @NgModule({
   
@@ -81,6 +91,8 @@ import { QuotationsComponent } from './vendors/quotations/quotations.component';
     ProjectSignupComponent,
     ProposalComponent,
     CostEstimatesComponent,
+    CostEstimatesListComponent,
+    CostEstimatesProposalComponent,
     ProjectDetailComponent,
     QuantityInputComponent,
     RateInputComponent,
@@ -88,16 +100,24 @@ import { QuotationsComponent } from './vendors/quotations/quotations.component';
     PaymentTermsComponent,
     VendorsComponent,
     VendorsListComponent,
-    SendQuoteComponent,
+    SendTenderComponent,
     QuotationsComponent,
-    NewVendorComponent
+    NewVendorComponent,
+    AuthenticationComponent,
+    TendersComponent,
+    TendersListComponent,
+    SendQuoteComponent,
+    ViewQuoteComponent,
+    CompareQuotesComponent
   ],
   providers: [
     ProposalService,
     MastersService,
     VendorsService,
     LoginService,
-    AlwaysAuthGuard
+    UserService,
+    AlwaysAuthGuard,
+    DynamicDatabase
   ],
   entryComponents: [
     NewMasterComponent,

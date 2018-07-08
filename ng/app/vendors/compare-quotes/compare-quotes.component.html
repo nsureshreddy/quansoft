@@ -1,0 +1,34 @@
+<div class="mat-card">
+  <h3 class="p-l-sm">Compare Quotes / Micro Labs</h3>
+  <div class="content" *ngIf="project">
+    <mat-grid-list cols="12" rowHeight="32px">
+      <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="columnBackground"
+        [style.color]="columnTextColor">
+        {{tile.text}}
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-list class="inline-block col-4">
+      <ng-container *ngFor="let bill of project.costEstimates.bills">
+        <h3 mat-subheader>{{bill.costCode}}
+          <span class="text-muted m-l">{{bill.costCentre}}</span>
+        </h3>
+        <mat-list-item *ngFor="let activity of bill.activities">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <h4 mat-line>{{activity.shortDescription}}</h4>
+          <p mat-line> {{activity.rate * activity.quantity}} </p>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+    <ng-container *ngFor="let quotation of quotations">
+      <mat-list *ngFor="let bill of quotation.bills" class="inline-block col-4 quotations-list">
+        <h3>&nbsp;</h3>
+        <mat-list-item *ngFor="let activity of bill.activities">
+          <mat-icon mat-list-icon></mat-icon>
+          <h4>&nbsp;</h4>
+          <p mat-line> {{activity.rate * activity.quantity}} </p>
+        </mat-list-item>
+      </mat-list>
+    </ng-container>
+
+  </div>
+</div>

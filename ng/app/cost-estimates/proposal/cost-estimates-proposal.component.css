@@ -1,0 +1,26 @@
+.cost-estimates {
+  min-height: calc(100vh - 56px);
+  background-color: #fff;
+  font-size: 14px;
+}
+.cost-estimates .header {
+  margin: 12px 0;
+  font-size: 20px;
+}
+
+.mat-checkbox-inner-container {
+  height: 16px;
+  width: 16px;
+}
+.packages-text {
+  margin: 16px 0;
+  font-size: 14px;
+  padding-left: 1rem;
+  font-weight: 500;
+}
+
+.cost-estimates .mat-drawer {
+  width: 216px;
+  overflow: hidden;
+  border-right: 1px solid #ccc;
+}

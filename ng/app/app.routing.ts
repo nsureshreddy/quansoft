@@ -1,6 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
 import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
 
 import { LoginComponent } from './login/login.component';
@@ -8,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProposalsComponent } from './dashboard/proposals/proposals.component';
 import { ProjectSignupComponent } from './dashboard/project-signup/project-signup.component';
 import { ProposalComponent } from './dashboard/proposal/proposal.component';
-import { CostEstimatesComponent } from './dashboard/cost-estimates/cost-estimates.component';
+import { CostEstimatesComponent } from './cost-estimates/cost-estimates.component';
 import { ProjectDetailComponent } from './dashboard/project-detail/project-detail.component';
 import { MastersComponent } from './masters/masters.component';
 import { ResourceMastersComponent } from './masters/resource-masters.component';
@@ -20,8 +19,16 @@ import { BillDetailComponent } from './masters/bill-detail/bill-detail.component
 import { AlwaysAuthGuard } from './services/authguard';
 import { VendorsComponent } from './vendors/vendors.component';
 import { VendorsListComponent } from './vendors/list/vendors-list.component';
-import { SendQuoteComponent } from './vendors/send-quote/send-quote.component';
+import { SendTenderComponent } from './vendors/send-tender/send-tender.component';
 import { QuotationsComponent } from './vendors/quotations/quotations.component';
+import { CostEstimatesListComponent } from './cost-estimates/list/cost-estimates-list.component';
+import { CostEstimatesProposalComponent } from './cost-estimates/proposal/cost-estimates-proposal.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { TendersComponent } from './dashboard/tenders/tenders.component';
+import { TendersListComponent } from './dashboard/tenders/tenders-list/tenders-list.component';
+import { SendQuoteComponent } from './dashboard/tenders/send-quote/send-quote.component';
+import { ViewQuoteComponent } from './vendors/view-quotation/view-quote.component';
+import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.component';
 
 
 const appRoutes: Routes = [
@@ -40,7 +47,16 @@ const appRoutes: Routes = [
           { path: 'project-signup', component: ProjectSignupComponent },
           { path: 'proposal/:jobId', component: ProposalComponent },
           { path: 'proposal/:jobId/cost-estimates', component: CostEstimatesComponent },
-          { path: 'proposal-detail/:jobId', component: ProjectDetailComponent }
+          { path: 'proposal-detail/:jobId', component: ProjectDetailComponent },
+          {
+            path: 'tenders',
+            component: TendersComponent,
+            children: [
+              { path: 'list', component: TendersListComponent},
+              { path: 'send-quote/:jobId', component: SendQuoteComponent },
+              { path: '', redirectTo: 'list', pathMatch: 'full' },
+            ]
+          }
         ],
       },
       {
@@ -68,19 +84,27 @@ const appRoutes: Routes = [
         children: [
           { path: '', redirectTo: 'list', pathMatch: 'full' },
           { path: 'list', component: VendorsListComponent, pathMatch: 'full' },
-          { path: 'send-quote', component: SendQuoteComponent, pathMatch: 'full' },
+          { path: 'send-tender', component: SendTenderComponent, pathMatch: 'full' },
           { path: 'quotations', component: QuotationsComponent, pathMatch: 'full' },
+          { path: 'view-quote/:jobId/:vendor', component: ViewQuoteComponent, pathMatch: 'full' },
+          { path: 'compare-quotes/:jobId', component: CompareQuotesComponent, pathMatch: 'full' }
         ]
       },
       {
         path: 'cost-estimates',
-        component: CostEstimatesComponent
+        component: CostEstimatesComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          { path: 'list', component: CostEstimatesListComponent, pathMatch: 'full' },
+          { path: 'proposal/:jobId', component: CostEstimatesProposalComponent }
+        ]
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ],
     canActivate: [AlwaysAuthGuard]
   },
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'auth/:token', component: AuthenticationComponent },
   { path: '**', redirectTo: '' }
 ];
 

@@ -24,7 +24,7 @@ export class ProposalsComponent implements OnInit {
   }
 
   get() {
-    this.proposalService.getProjects().subscribe(resp => {
+    this.proposalService.getProposals().subscribe(resp => {
       this.projects = resp;
       this.dataTable();
     }, err => {

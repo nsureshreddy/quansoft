@@ -10,7 +10,7 @@ export class VendorsComponent implements OnInit {
   activeIndex = 0;
   tabs: any[] = [
     {link: '/vendors/list', label: 'Vendors List', icon: 'dashboard' },
-    {link: '/vendors/send-quote', label: 'Send Quote', icon: 'book' },
+    {link: '/vendors/send-tender', label: 'Send Tender', icon: 'book' },
     {link: '/vendors/quotations', label: 'Quotations', notifications: true }
   ];
 

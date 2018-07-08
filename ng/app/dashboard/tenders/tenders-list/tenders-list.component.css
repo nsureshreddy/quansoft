@@ -1,0 +1,31 @@
+  .input-group {
+    padding: .5rem;
+    margin-bottom: 3px;
+  }
+  .input-group .form-control {
+    display: table-cell;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 0;
+    line-height: 1.25;
+    color: #55595c;
+    background-image: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    width: calc(100% - 33px);
+  }
+  .tenders-table .mat-header-row {
+    height: 2rem;
+  }
+  .tenders-table .mat-row {
+    height: 2.5rem;
+  }
+  .tenders-table .mat-header-row th {
+    font-size: .875rem;
+  }
+  .tenders-table .mat-header-row th .mat-checkbox-frame {
+    border-color: #fff!important;
+  }
+table {
+    width: 100%;
+}

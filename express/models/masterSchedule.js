@@ -31,6 +31,9 @@ var masterScheduleActivitySchema = Schema({
   uom: {
     type: String
   },
+  quantity: {
+    type: Number
+  },
   rate: {
     type: Number
   },
@@ -77,4 +80,7 @@ MasterScheduleSchema.pre('save', function (next) {
   return next();
 });
 
-module.exports = mongoose.model('MasterSchedule', MasterScheduleSchema);
+module.exports = {
+  'MasterSchedule': mongoose.model('MasterSchedule', MasterScheduleSchema),
+  'MasterBill': mongoose.model('MasterBill', masterBillSchema)
+};

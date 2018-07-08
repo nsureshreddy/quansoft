@@ -24,8 +24,8 @@ export class ProposalService {
     return this.http.post('/api/project-signup', project);
   }
 
-  getProjects() {
-    return this.http.get('/api/projects');
+  getProposals() {
+    return this.http.get('/api/proposals');
   }
   
   updateProjectProposal(scopeItems: ScopeItem[], jobId: number) {
@@ -38,6 +38,10 @@ export class ProposalService {
 
   updateProjectTerms(terms: TermsAndConditions, jobId: number) {
     return this.http.post('/api/project/update-terms/' + jobId, terms);
+  }
+
+  updateProject(project: Project) {
+    return this.http.put('/api/update-project', project);
   }
   
   getAllUsers() {

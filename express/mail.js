@@ -72,6 +72,32 @@ module.exports = {
       Founder, Product Owner at QuanSoft
     `
     sendMail(mailOptions);
+  },
+
+  sendTendor: function (jobId, emails) {
+    if (emails && emails.constructor === Array && emails.length > 0) {
+      emails.forEach((mail) => {
+        var authToken = jwt.sign({ email: mail, et: 1.03 }, 'config.secret');
+        mailOptions.to = mail;
+        mailOptions.subject = 'Notice Inviting Tender';
+        mailOptions.html = `
+        
+      Hi ${mail},<br/><br/>
+
+      Great to have you onboard!<br/><br/>
+
+      Please Click <a href="http://localhost:3000/auth/${authToken}">Here </a> to submit quotation.<br/><br/><br/>
+
+
+      Best,<br/><br/>
+
+      Karthik<br/>
+      Founder, Product Owner at QuanSoft
+      
+    `
+        sendMail(mailOptions);
+      });
+    }
   }
   
 };

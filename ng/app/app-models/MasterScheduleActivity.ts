@@ -6,7 +6,9 @@ export class MasterScheduleActivity{
   description: string;
   shortDescription: string;
   uom: string;
+  quantity: number;
   rate: number;
+  amount: number;
   totalCost: number;
   ratePerUnit: number;
   rateComponents: Array<RateComponent>;
