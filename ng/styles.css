@@ -171,7 +171,7 @@ li {
 }
 
 .padding {
-  padding: 1rem;
+  padding: 1rem!important;
 }
 
 .mat-form-field-wrapper {

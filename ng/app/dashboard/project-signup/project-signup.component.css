@@ -7,6 +7,7 @@
 }
 .project-signup mat-form-field {
   width: 50%;
+  margin-left: 2px;
 }
 
 .signup-button {

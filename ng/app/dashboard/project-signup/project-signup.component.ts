@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material';
@@ -55,7 +55,8 @@ export class ProjectSignupComponent {
 
   signup() {
     this.project = Object.assign(new Project, this.orgForm.value, this.orderForm.value, this.scopeForm.value);
-
+    this.project.scope = this.scope.value;
+    this.project.participants = this.participants.value;
     this.proposalService.projectSignup(this.project).subscribe(resp => {
       this.snackBar.open('Project Created Successfully.', 'Dismiss', {});
       this.router.navigate(['dashboard/proposals']);

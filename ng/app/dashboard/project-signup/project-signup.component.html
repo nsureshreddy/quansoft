@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="padding">
   <div class="project-signup mat-elevation-z8">
       <h3 class="header">New Project</h3>
       <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
@@ -49,7 +49,7 @@
             </mat-form-field>
             <div>
               <button mat-raised-button matStepperPrevious>Back</button>
-              <button mat-raised-button matStepperNext color="primary">Next</button>
+              <button mat-raised-button matStepperNext class="m-l" color="primary">Next</button>
             </div>
           </form>
         </mat-step>
@@ -73,7 +73,7 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field>
-              <mat-select placeholder="Scope" formControlName="scope" multiple>
+              <mat-select placeholder="Scope" name="scope" [formControl]="scope" multiple>
                 <mat-select-trigger>
                   {{scope.value ? scope.value[0] : ''}}
                   <span *ngIf="scope.value?.length > 1">
@@ -87,7 +87,7 @@
               <input matInput placeholder="FSI" formControlName="fsi">
             </mat-form-field>
             <mat-form-field>
-              <mat-select placeholder="Participants" formControlName="participants" multiple>
+              <mat-select placeholder="Participants" [formControl]="participants" multiple>
                 <mat-select-trigger>
                   {{participants.value ? participants.value[0] : ''}}
                   <span *ngIf="participants.value?.length > 1">
@@ -99,7 +99,7 @@
             </mat-form-field>
             <div>
               <button mat-raised-button matStepperPrevious>Back</button>
-              <button mat-raised-button color="primary" (click)="signup()">Save</button>
+              <button mat-raised-button class="m-l" color="primary" (click)="signup()">Save</button>
             </div>
           </form>
         </mat-step>
