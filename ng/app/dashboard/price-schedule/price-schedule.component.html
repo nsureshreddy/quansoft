@@ -1,7 +1,6 @@
-<mat-card class="price-schedule-form">
   <ng-container *ngFor="let scope of scopeItems">
     <p class="_700 t-d-u">{{scope.name}}</p>
-    <table>
+    <table class="proposal-activities">
       <thead>
         <tr>
           <th>Activity</th>
@@ -47,11 +46,8 @@
       </tbody>
       <button (click)="addActivity(scope)" class="add-activity" mat-raised-button color="primary">Add New Activity</button>
     </table>
-    
   </ng-container>
-
   <div class="m-t text-right">
     <P class="bold" [hidden]="!totalAmount">Total {{totalAmount}}</P>
     <button (click)="savePriceSchedule()" mat-raised-button color="primary">Save & Continue</button>
   </div>
-</mat-card>

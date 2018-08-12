@@ -33,11 +33,11 @@ export class NewMasterComponent implements OnInit {
       activity: activity
     };
 
-    let dialogRef = this.dialog.open(RateInputComponent, this.dialogConfig);
+    const dialogRef = this.dialog.open(RateInputComponent, this.dialogConfig);
 
     dialogRef.afterClosed().subscribe(data => {
       let subTotal = 0;
-      let rateComponents: Array<RateComponent> = [];
+      const rateComponents: Array<RateComponent> = [];
       if (data && data.scheduleOfRates) {
         data.scheduleOfRates.forEach(element => {
           if (element.subTotal) {
@@ -48,7 +48,7 @@ export class NewMasterComponent implements OnInit {
           }
         });
         activity.rateComponents = rateComponents;
-        activity.rate = subTotal * (1 + data.profitMargin/100);
+        activity.rate = subTotal * (1 + data.profitMargin / 100);
         activity.profitMargin = data.profitMargin;
       }
     });
@@ -58,12 +58,12 @@ export class NewMasterComponent implements OnInit {
     if (!bill.activities) {
       bill.activities = new Array<MasterScheduleActivity>();
     }
-    
-    let newActivity = Object.assign(new MasterScheduleActivity, {});
+
+    const newActivity = Object.assign(new MasterScheduleActivity, {});
     bill.activities.push(newActivity);
   }
 
-  removeActivity (index, idx) {
+  removeActivity(index, idx) {
     this.schedule.bills[index].activities.splice(idx, 1);
   }
 
@@ -74,7 +74,7 @@ export class NewMasterComponent implements OnInit {
     this.schedule.bills.push(new MasterBill({}));
   }
 
-  removeBill (index) {
+  removeBill(index) {
     this.schedule.bills.splice(index, 1);
   }
 

@@ -8,4 +8,10 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="m-t" id="hot"></div>
+<div class="margin" id="hot"></div>
+
+<div class="text-right m-r text-sm" *ngIf="quantity">Total Quantity: {{quantity}}</div>
+<div class="padding pull-right">
+  <button class="m-r" mat-raised-button color="primary" (click)="calculate()">Calculate Quantity</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</div>

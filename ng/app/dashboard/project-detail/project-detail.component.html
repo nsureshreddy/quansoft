@@ -3,11 +3,10 @@
     <i class="material-icons">picture_as_pdf</i>
   </a>
   <div id="page-1" class="proposal-doc">
-    <div class="doc-header">Quansys Consulting | Prooosal for {{project.name}}</div>
+    <div class="doc-header">Quansys Consulting | Proposal for {{project.name}}</div>
     <div class="proposal-text">PROPOSAL FOR COST CONSULTING SERVICES</div>
   </div>
   <div id="page-2" class="proposal-doc">
-    <div class="doc-header">Quansys Consulting | Proposal for {{project.name}}</div>
     <h3>Profile</h3>
     <p>
       Quansys Consulting is an Indian; Bangalore based Professional Cost Consulting Firm. We are inimitably qualified to provide
@@ -26,13 +25,8 @@
       and attainable outcomes for every project and client.
     </p>
     <img src="/assets/images/pdf-1.png">
-    <p class="doc-footer">
-      <span>(c) Quansys Consulting, All Rights Reserved.</span>
-      <span class="pull-right">Quansys/Prop/17-18-0303/028R1</span>
-    </p>
   </div>
   <div id="page-3" class="proposal-doc">
-    <div class="doc-header">Quansys Consulting | Profosal for {{project.name}}</div>
     <h3>Overview</h3>
     <p>
       Quansys India manages the complete development of the facility from its concept & design to till the commission and handing
@@ -57,15 +51,9 @@
     <p><i class="material-icons">check</i> No of Floors: {{project.numberOfFloors}}</p>
     <p>As per the understandings the above given are the Project details and we outlined our scope of
         services to your project specific given under Scope of services.</p>
-    <p class="doc-footer">
-      <span>(c) Quansys Consulting, All Rights Reserved.</span>
-      <span class="pull-right">Quansys/Prop/17-18-0303/028R1</span>
-    </p>
   </div>
   <div id="page-4" class="proposal-doc payment-terms">
-      <div class="doc-header">Quansys Consulting | Profosal for {{project.name}}</div>
-      <h3>Scope Of Services</h3>
-      
+      <h3>Scope Of Services</h3>      
         <div *ngFor="let scope of project.scopeItems" class="row">
             <div class="col-12" *ngFor="let activity of scope.workItems">
               <div class="_500">{{activity.name}}</div>
@@ -77,13 +65,8 @@
             <div class="_500">{{term.description}}</div>
           </div>
         </div>
-        <p class="doc-footer">
-          <span>(c) Quansys Consulting, All Rights Reserved.</span>
-          <span class="pull-right">Quansys/Prop/17-18-0303/028R1</span>
-        </p>
   </div>
   <div id="page-5" class="proposal-doc terms-detail">
-    <div class="doc-header">Quansys Consulting | Profosal for {{project.name}}</div>
     <h3>Terms & Conditions</h3>
     <div *ngFor="let key of project.termsAndonditions | keys" class="row">
       <div class="col-12">
@@ -91,9 +74,5 @@
         <div class="_500">{{project.termsAndonditions[key]}}</div>
       </div>
     </div>
-    <p class="doc-footer">
-      <span>(c) Quansys Consulting, All Rights Reserved.</span>
-      <span class="pull-right">Quansys/Prop/17-18-0303/028R1</span>
-    </p>
   </div>   
 </mat-card>

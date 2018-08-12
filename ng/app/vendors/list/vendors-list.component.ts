@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSnackBar, MatDialog, MatSort, MatPaginator, MatTableDataSource }from '@angular/material';
+import { MatSnackBar, MatDialog, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import { Vendor } from '../../app-models/Vendor';
@@ -23,7 +23,7 @@ export class VendorsListComponent implements OnInit {
   vendors: Vendor[] = [];
   selectedVendor: Vendor;
 
-  constructor(public dialog: MatDialog, public snackBar: MatSnackBar,  private router: Router, private vendorsService: VendorsService) { }
+  constructor(public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, private vendorsService: VendorsService) { }
 
   ngOnInit() {
     this.getVendors();
@@ -31,7 +31,7 @@ export class VendorsListComponent implements OnInit {
 
   getVendors() {
     this.decorateTable();
-    this.vendorsService.getVendors().subscribe((resp:any) => {
+    this.vendorsService.getVendors().subscribe((resp: any) => {
       if (resp && !resp.error) {
         this.vendors = resp.data;
         this.decorateTable();
@@ -53,8 +53,8 @@ export class VendorsListComponent implements OnInit {
 
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   detail(vendor: Vendor) {
@@ -62,10 +62,10 @@ export class VendorsListComponent implements OnInit {
   }
 
   newVendor() {
-    let dialog = this.dialog.open(NewVendorComponent, {panelClass: 'new-master-dialog'});
+    const dialog = this.dialog.open(NewVendorComponent, { panelClass: 'new-master-dialog' });
 
     dialog.afterClosed().subscribe(data => {
-      if(data && data.vendor) {
+      if (data && data.vendor) {
         this.vendors.push(data.vendor);
         this.snackBar.open('Vendor Registration Completed.', 'Dismiss', {});
         this.decorateTable();

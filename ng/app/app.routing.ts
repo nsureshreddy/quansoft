@@ -16,7 +16,7 @@ import { MachineriesCostsComponent } from './masters/machineries-costs/machineri
 import { ManpowerCostsComponent } from './masters/manpower-costs/manpower-costs.component';
 import { MasterSchedulesComponent } from './masters/master-schedules/master-schedules.component';
 import { BillDetailComponent } from './masters/bill-detail/bill-detail.component';
-import { AlwaysAuthGuard } from './services/authguard';
+import { AlwaysAuthGuard } from './services/auth.guard';
 import { VendorsComponent } from './vendors/vendors.component';
 import { VendorsListComponent } from './vendors/list/vendors-list.component';
 import { SendTenderComponent } from './vendors/send-tender/send-tender.component';
@@ -29,10 +29,15 @@ import { TendersListComponent } from './dashboard/tenders/tenders-list/tenders-l
 import { SendQuoteComponent } from './dashboard/tenders/send-quote/send-quote.component';
 import { ViewQuoteComponent } from './vendors/view-quotation/view-quote.component';
 import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.component';
-
+import { UsersComponent } from './dashboard/users/users.component';
+import { AdminGuard } from './services/admin.guard';
+import { SessionResolver } from './services/session.resolver';
+import { RevisionsComponent } from './dashboard/revisions/revisions.component';
+import { RevisionComponent } from './dashboard/revision/revision.component';
+import { ProjectEditComponent } from './dashboard/project-edit/project-edit.component';
 
 const appRoutes: Routes = [
-    
+
   // App routes goes here here
   {
     path: '',
@@ -48,15 +53,17 @@ const appRoutes: Routes = [
           { path: 'proposal/:jobId', component: ProposalComponent },
           { path: 'proposal/:jobId/cost-estimates', component: CostEstimatesComponent },
           { path: 'proposal-detail/:jobId', component: ProjectDetailComponent },
+          { path: 'project/edit/:jobId', component: ProjectSignupComponent },
           {
             path: 'tenders',
             component: TendersComponent,
             children: [
-              { path: 'list', component: TendersListComponent},
+              { path: 'list', component: TendersListComponent },
               { path: 'send-quote/:jobId', component: SendQuoteComponent },
               { path: '', redirectTo: 'list', pathMatch: 'full' },
             ]
-          }
+          },
+          { path: 'users', component: UsersComponent, pathMatch: 'full', canActivate: [AdminGuard] }
         ],
       },
       {
@@ -64,7 +71,7 @@ const appRoutes: Routes = [
         component: MastersComponent,
         children: [
           { path: '', redirectTo: 'schedules', pathMatch: 'full' },
-          { 
+          {
             path: 'resources',
             component: ResourceMastersComponent,
             children: [
@@ -96,12 +103,18 @@ const appRoutes: Routes = [
         children: [
           { path: '', redirectTo: 'list', pathMatch: 'full' },
           { path: 'list', component: CostEstimatesListComponent, pathMatch: 'full' },
-          { path: 'proposal/:jobId', component: CostEstimatesProposalComponent }
+          { path: 'proposal/:jobId', component: CostEstimatesProposalComponent },
+          { path: 'revisions/:jobId', component: RevisionsComponent },
+          { path: 'revision/:jobId/:revId', component: RevisionComponent },
+          { path: 'revision/:jobId/:revId/:edit', component: RevisionComponent },
         ]
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ],
-    canActivate: [AlwaysAuthGuard]
+    canActivate: [AlwaysAuthGuard],
+    resolve: {
+      user: SessionResolver
+    }
   },
   { path: 'login', component: LoginComponent },
   { path: 'auth/:token', component: AuthenticationComponent },

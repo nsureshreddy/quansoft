@@ -1,0 +1,147 @@
+<mat-drawer-container class="user-groups">
+  <mat-drawer mode="side" opened="true">
+    <section class="groups-menu m-t">
+      <a (click)="filterByType=false;" class="all-users" [ngClass]="{'active':!filterByType}">All Users</a>
+      <nav>
+        <a [ngClass]="{'active':filterByType==type.key}" (click)="filterByType=type.key;" *ngFor="let type of userTypes">{{type.label}}</a>
+      </nav>
+    </section>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-drawer-container class="users-list">
+      <mat-drawer class="users-list-container" mode="side" opened="true">
+        <section class="input-group b-b">
+          <span matPrefix><i class="material-icons v-a-m">search</i>&nbsp;</span>
+          <input matPrefix="search" class="form-control no-border no-bg" [(ngModel)]="searchTerm" placeholder="Search">
+        </section>
+        <section class="users">
+          <ul>
+            <li *ngFor="let user of users | search:searchTerm | filter:{key:'designation', value: filterByType}">
+              <a (click)="detail(user)">{{user.name}}</a> 
+              <i matTooltip="Delete User" class="material-icons link pull-right" (click)="deleteDialog(user._id)">delete</i>
+            </li>
+          </ul>
+          <p *ngIf="!users?.length" class="text-center">No Users Found.</p>
+        </section>
+        <section class="flex-spacer">
+        </section>
+        <footer>
+          <button class="mat-raised-button mat-primary" (click)="signup()">New User</button>
+        </footer>
+      </mat-drawer>
+      <mat-drawer-content>
+        <section *ngIf="user && !profileView">
+          <div class="user-detail">
+            <h3 class="n-m-t">User Registration</h3>
+            <form [formGroup]="userForm">
+              <mat-form-field>
+                <input matInput formControlName="name" placeholder="Name">
+                <mat-error *ngIf="userForm.controls['name'].errors?.required">
+                  Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="userForm.controls['email'].errors?.required">
+                  Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="userForm.controls['email'].errors?.email">
+                  Please enter a valid email address
+                </mat-error>
+                
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput formControlName="userId" placeholder="User ID">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput formControlName="phone" placeholder="Phone">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select (selectionChange)="onDesignationChange()" formControlName="designation" placeholder="Designation">
+                  <mat-option value="engineer">Engineer</mat-option>
+                  <mat-option value="manager">Manager</mat-option>
+                  <mat-option value="builder">Builder</mat-option>
+                  <mat-option value="vendor">Vendor</mat-option>
+                </mat-select>
+                <mat-error *ngIf="userForm.controls['designation'].errors?.required">
+                    Please choose a designation for this user.
+                  </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="password" formControlName="password" autocomplete="new-password" placeholder="Password">
+                <mat-error *ngIf="userForm.controls['password'].errors?.required">
+                    Please choose a password.
+                  </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field *ngIf="showAssignedProjects">
+                <mat-chip-list #chipList >
+                  <mat-chip
+                    *ngFor="let project of user.assignedProjects"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="removeAssignedProject(project)">
+                    {{project.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Choose Projects"
+                    #projectInput
+                    [formControl]="projectCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let project of filteredProjects | async" [value]="project">
+                    {{project.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <div class="m-t">
+                <button class="mat-raised-button m-r" (click)="cancel()">Cancel</button>
+                <button type="submit" class="mat-raised-button mat-primary" (click)="save()">Save</button>
+              </div>
+            </form>
+          </div>
+        </section>
+        <section *ngIf="profileView">
+          <div class="user-detail">
+            <h3 class="n-m-t">
+              User Detail - {{user.name}}
+              <i matTooltip="Edit User" (click)="edit(user)" class="material-icons link pull-right">edit</i>
+            </h3>
+            <div class="col-12">
+              <small class="text-muted">Name</small>
+              <div class="_500">{{user.name}}</div>
+            </div>
+            <div class="col-12">
+              <small class="text-muted">User Id</small>
+              <div class="_500">{{user.userId}}</div>
+            </div>
+            <div class="col-12">
+              <small class="text-muted">Phone</small>
+              <div class="_500">{{user.phone}}</div>
+            </div>
+            <div class="col-12">
+              <small class="text-muted">Email</small>
+              <div class="_500">{{user.email}}</div>
+            </div>
+            <div class="col-12">
+              <small class="text-muted">Designation</small>
+              <div class="_500 text-capitalize">{{user.designation}}</div>
+            </div>
+            <div class="col-12" *ngIf="user.assignedProjects?.length">
+              <small class="text-muted">Assigned Projects</small>
+              <div *ngFor="let project of user.assignedProjects" class="_500 text-capitalize">
+                {{project.name}}
+              </div>
+            </div>
+          </div>
+        </section>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </mat-drawer-content>
+</mat-drawer-container>

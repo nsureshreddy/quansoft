@@ -1,0 +1,97 @@
+.user-groups,
+.users-list {
+  min-height: calc(100vh - 56px);
+  background-color: #fff;
+  font-size: 14px;
+}
+  
+.user-groups .mat-drawer,
+.users-list .mat-drawer {
+  width: 216px;
+  overflow: hidden;
+  border-right: 1px solid #ccc;
+}
+.all-users {
+  padding: .75rem 1rem;
+}
+.groups-menu .active {
+  font-weight: 700;
+  background: #ccc;
+
+}
+.groups-menu a {
+  display: block;
+  padding: 1rem;
+  padding: .5rem 1rem;
+}
+
+.groups-menu a:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.input-group {
+  padding: .5rem;
+  margin-bottom: 3px;
+}
+
+.input-group .form-control {
+  display: table-cell;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0;
+  line-height: 1.25;
+  color: #55595c;
+  background-image: none;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: calc(100% - 33px);
+}
+.users-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.users-list-container .flex-spacer {
+  max-height: calc(100vh - 133px);
+  overflow: auto;
+}
+
+.users-list-container footer {
+  margin: 12px auto;
+}
+
+.users ul{
+  padding: 0;
+  margin: 0;
+}
+.users ul li {
+  padding: 6px 12px;
+  line-height: 1rem;
+}
+.users ul li:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.users ul li a {
+  width: calc(100% - 16px);
+  display: inline-block;
+}
+
+.users ul li i {
+  font-size: 1rem;
+  color: #cc0000;
+}
+
+.user-detail {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 1rem;
+}
+.user-detail [class^="col-"] {
+  margin-bottom: 1rem;
+}
+.user-detail .mat-form-field {
+  display: block;
+}

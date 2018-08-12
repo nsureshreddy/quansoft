@@ -38,30 +38,6 @@
       </ul>
       <mat-menu #notifiications="matMenu" [overlapTrigger]="false">
         <div class="notifiications clear-fix">
-          <ul>
-            <li *ngFor="let user of newUsers">
-              <span class="icon pull-left">
-                <i class="material-icons">perm_identity</i>
-              </span>
-              <p>
-                <span class="block"> New User Registered </span>
-                <small class="text-muted">{{user.name}}</small>
-                <small class="text-muted p-l-2">1 day ago</small>
-              </p>
-              <div class="row notification-actions">
-                <div class="col-3 b-r">
-                  <a (click)="updateUserStatus(user, 'active')">
-                    <i matTooltip="Approve" class="material-icons link">done</i>
-                  </a>
-                </div>
-                <div class="col-3">
-                  <a (click)="updateUserStatus(user, 'archive')">
-                    <i matTooltip="Reject" class="material-icons link">delete_outline</i>
-                  </a>
-                </div>
-              </div>
-            </li>
-          </ul>
         </div>
       </mat-menu>
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
@@ -76,11 +52,11 @@
           </div>
           <ul class="nav-items">
             <li class="list-item">
-              <a routerLink="../settings">
+              <a routerLink="./dashboard/users">
                 <i class="material-icons">settings</i> Settings</a>
             </li>
-            <li class="list-item">
-              <a routerLink="../settings/users">
+            <li *ngIf="user.designation==='management'" class="list-item">
+              <a routerLink="/dashboard/users">
                 <i class="material-icons">supervised_user_circle</i> Manage Users</a>
             </li>
             <li (click)="logout()" class="list-item">

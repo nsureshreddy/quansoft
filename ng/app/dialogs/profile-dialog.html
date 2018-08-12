@@ -1,0 +1,29 @@
+<h1 class="n-m" mat-dialog-title>Update Profile</h1>
+<div mat-dialog-content>
+  <form [formGroup]="userForm">
+    <mat-form-field class="w-full">
+      <input matInput formControlName="name" placeholder="Name">
+      <mat-error *ngIf="userForm.controls['name'].errors?.required">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input matInput formControlName="userId" placeholder="User ID">
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input matInput formControlName="phone" placeholder="Phone">
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input matInput type="password" formControlName="password" autocomplete="new-password" placeholder="Password">
+      <mat-error *ngIf="userForm.controls['password'].errors?.required">
+        Please choose a password.
+      </mat-error>
+    </mat-form-field>
+    <div class="m-t m-b pull-right">
+      <button type="submit" mat-raised-button color="primary" (click)="save()">Save</button>
+    </div>
+  </form>
+</div>

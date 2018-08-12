@@ -1,5 +1,7 @@
 var express = require('express');
 var path = require('path');
+const compression = require('compression')
+
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
@@ -19,10 +21,12 @@ mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
 
 var dist = path.join(__dirname, '../ng/dist')
 
+app.use(compression ());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(dist));
+app.get('/favicon.ico', (req, res) => res.status(204));
 app.use('/', express.static(dist));
 app.use('/login', express.static(dist));
 app.use('/dashboard/*', express.static(dist));

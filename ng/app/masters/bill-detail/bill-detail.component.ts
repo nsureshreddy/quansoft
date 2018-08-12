@@ -12,7 +12,7 @@ export class BillDetailComponent implements OnInit {
   constructor(private masterService: MastersService) { }
   bill: MasterBill;
   ngOnInit() {
-   this.getMasterSchedules(); 
+    this.getMasterSchedules();
   }
   getMasterSchedules() {
     this.masterService.getMasterSchedules().subscribe((response: any) => {

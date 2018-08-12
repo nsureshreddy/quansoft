@@ -1,6 +1,6 @@
-import { RateComponent } from "./rateComponent";
+import { RateComponent } from './rateComponent';
 
-export class MasterScheduleActivity{
+export class MasterScheduleActivity {
   _id: string;
   code: string;
   description: string;

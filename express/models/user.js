@@ -7,28 +7,34 @@ var UserSchema = new Schema({
     type: String,
   },
   password: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
+    required: true,
+    unique: true
   },
   phone: {
-    type: String,
+    type: String
   },
   designation: {
-    type: String,
+    type: String
+  },
+  activated: {
+    type: Boolean
   },
   userId: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   roles: {
     type: Array
   },
   status: {
     type: String
+  },
+  assignedProjects: {
+    type: Object
   }
 });
 
@@ -40,6 +46,7 @@ UserSchema.pre('save', function (next) {
       if (err) {
         return next(err);
       }
+
       bcrypt.hash(user.password, salt, null, function (err, hash) {
         if (err) {
           return next(err);

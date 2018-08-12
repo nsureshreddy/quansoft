@@ -5,7 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   templateUrl: './resource-masters.component.html',
   styleUrls: ['./resource-masters.component.css']
 })
-export class ResourceMastersComponent implements OnInit {  
+export class ResourceMastersComponent implements OnInit {
   resourceTypes: any = [
     {
       label: 'Material Costs',
@@ -24,7 +24,7 @@ export class ResourceMastersComponent implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

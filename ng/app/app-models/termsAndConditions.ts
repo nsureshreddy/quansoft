@@ -3,9 +3,8 @@ export class TermsAndConditions {
   penalty: string;
   bonusClause: string;
   staffDeployment: string;
-  paymentsTerms : string;
+  paymentsTerms: string;
   accountDetails: string;
   termination: string;
   arbitration: string;
-  }
-  
+}

@@ -8,7 +8,10 @@ var costEstimatesSchema = Schema({
   bills:[{
     type: masterBillSchema,
     ref: 'MasterBill'
-  }]
+  }],
+  lastModified: Object,
+  status: String,
+  builderComments: String
 });
 
 mongoose.model('CostEstimates', costEstimatesSchema);
@@ -58,6 +61,10 @@ var ProjectSchema = new Schema({
     required: true
   },
   client: {
+    type: String,
+    required: true
+  },
+  email: {
     type: String,
     required: true
   },

@@ -1,0 +1,39 @@
+<div class="revisions-table padding">
+  <h4 class="header p-l-1">Revision History / <span>Micro Labs</span></h4>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="revNo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Revision No. </th>
+      <td mat-cell *matCellDef="let element;"> {{element.revNo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="submittedTimestamp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.submittedTimestamp}} </td>
+    </ng-container>
+    <ng-container matColumnDef="costEstimates">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost Estimates </th>
+      <td mat-cell *matCellDef="let element">
+        <a routerLink="/cost-estimates/revision/{{jobId}}/{{element._id}}">Cost Estimates</a>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="approvedTimestamp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Approved/Reject Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.respondedTimestamp}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+    <ng-container matColumnDef="comments">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Comments </th>
+      <td mat-cell *matCellDef="let element"> {{element.builderComments}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let element">
+        <i matTooltip="Update" class="link material-icons" routerLink="/cost-estimates/revision/{{jobId}}/{{element._id}}/edit">edit</i>
+      </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

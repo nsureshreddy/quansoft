@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card class="padding">
   <div class="proposal-form mat-elevation-z8">
     <h3 class="header">Proposal Details</h3>
     <mat-horizontal-stepper  #stepper="matHorizontalStepper">
       <mat-step>
         <ng-template matStepLabel>Price Schedule</ng-template>
-        <price-schedule [project]="project" [stepper]="stepper"></price-schedule>
+        <app-price-schedule [project]="project" [stepper]="stepper"></app-price-schedule>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Payment Terms</ng-template>

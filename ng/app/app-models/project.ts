@@ -1,14 +1,14 @@
-import { Proposal } from "./proposal";
-import { ScopeItem } from "./scopeItem";
-import { TermsAndConditions } from "./termsAndConditions";
-import { CostEstimates } from "./CostEstimates";
-import { MasterBill } from "./MasterBill";
+import { Proposal } from './proposal';
+import { ScopeItem } from './scopeItem';
+import { TermsAndConditions } from './termsAndConditions';
+import { CostEstimates } from './CostEstimates';
 
 export class Project {
-  jobId: string;
+  jobId: number;
   name: string;
   client: string;
   location: string;
+  email: string;
   region: string;
   stage: string;
   type: string;

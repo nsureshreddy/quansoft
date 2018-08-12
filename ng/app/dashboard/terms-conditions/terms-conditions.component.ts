@@ -14,7 +14,7 @@ export class TermsConditionsComponent {
   terms: TermsAndConditions;
   constructor(
     private route: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private proposalService: ProposalService,
     private snackbar: MatSnackBar) {
     this.terms = new TermsAndConditions();
@@ -28,9 +28,9 @@ export class TermsConditionsComponent {
   }
 
   updateTerms() {
-    let jobId = +this.route.snapshot.paramMap.get('jobId');
+    const jobId = +this.route.snapshot.paramMap.get('jobId');
     this.proposalService.updateProjectTerms(this.terms, jobId).subscribe(resp => {
-      this.snackbar.open('Terms & Conditions Updated.', '', {duration: 3000});
+      this.snackbar.open('Terms & Conditions Updated.', '', { duration: 3000 });
       this.router.navigate(['dashboard/proposals']);
     }, err => {
     });

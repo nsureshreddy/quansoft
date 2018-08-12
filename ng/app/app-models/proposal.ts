@@ -2,6 +2,6 @@ export class Proposal {
   id: number;
   builder: string;
   scope: string;
-  amount: number
+  amount: number;
   status: string;
 }

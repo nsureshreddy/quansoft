@@ -10,18 +10,18 @@ import { MasterResource } from '../../app-models/masterResource';
 export class MaterialCostsComponent implements OnInit {
   resources: any = [];
   updatedResources: any = [];
-  resourceType: string = 'material';
-  
-  constructor(private mastersService: MastersService) {}
+  resourceType = 'material';
+
+  constructor(private mastersService: MastersService) { }
 
   ngOnInit() {
     this.getMasterResources();
   }
-  
+
   getMasterResources() {
     this.mastersService.getMasterResources().subscribe((response: any) => {
       if (response.data) {
-        this.resources = response.data.filter((item)=>{
+        this.resources = response.data.filter((item) => {
           return item.resourceType === this.resourceType;
         });
         this.loadHandson();
@@ -29,19 +29,19 @@ export class MaterialCostsComponent implements OnInit {
     });
   }
 
-  removeResource (index) {
-    var resource = this.resources[index];
+  removeResource(index) {
+    const resource = this.resources[index];
     if (resource && resource._id) {
-      this.mastersService.deleteResource(resource._id).subscribe((response)=> {
+      this.mastersService.deleteResource(resource._id).subscribe((response) => {
       });
     }
   }
 
   loadHandson() {
-    var self = this;
+    const self = this;
     this.mastersService.loadHandOnTable(self, document.querySelector('#hot'));
   }
-  
+
   onFileChange(event: any) {
     this.mastersService.readFile(event).then((data) => {
       this.resources = this.resources.concat(data);
@@ -50,17 +50,17 @@ export class MaterialCostsComponent implements OnInit {
     });
   }
 
-  saveResources () {
+  saveResources() {
     this.mastersService.saveResources(this.updatedResources, this.resourceType).subscribe(results => {
       this.updatedResources = [];
     });
   }
-  
-  onResourceUpdate (data) {
+
+  onResourceUpdate(data) {
     if (data) {
-      var self = this;
-      data.forEach((item)=> {
-        var resource = self.resources[item[0]];
+      const self = this;
+      data.forEach((item) => {
+        const resource = self.resources[item[0]];
         resource[item[1]] = item[3];
         resource.resourceType = self.resourceType;
         self.addToUpdatedReSources(resource);
@@ -68,8 +68,8 @@ export class MaterialCostsComponent implements OnInit {
     }
   }
 
-  addToUpdatedReSources (resource: MasterResource) {
-    var index = this.updatedResources.findIndex((item: MasterResource)=>{
+  addToUpdatedReSources(resource: MasterResource) {
+    const index = this.updatedResources.findIndex((item: MasterResource) => {
       return resource._id === item._id;
     });
 

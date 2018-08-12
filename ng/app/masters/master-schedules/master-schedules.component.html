@@ -1,4 +1,4 @@
-<mat-card>
+<div class="mat-card padding">
     <div [hidden]="!mastersDataSource.data.length" class="masters-list mat-elevation-z8">
       <mat-table #table [dataSource]="mastersDataSource">
         <ng-container matColumnDef="code">
@@ -95,4 +95,4 @@
         CREATE A MASTER SCHEDULE
       </button>
     </div>
-  </mat-card>
+  </div>

@@ -16,7 +16,7 @@ export class MasterSchedulesComponent implements OnInit {
   displayedColumns = ['code', 'description', 'bills', '_id'];
   mastersDataSource;
   selectedBill: MasterBill;
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public dialog: MatDialog, private masterService: MastersService) {
@@ -35,15 +35,15 @@ export class MasterSchedulesComponent implements OnInit {
   }
 
   editMaster(id) {
-    var index = this.findIndexById(id);
+    const index = this.findIndexById(id);
     this.newMasterDialog(this.masters[index]);
   }
 
   deleteMaster(_id) {
     this.masterService.deleteMasterSchedule(_id).subscribe((response: any) => {
-      var _id = response.data && response.data._id;
+      const _id = response.data && response.data._id;
       if (_id) {
-        var index = this.findIndexById(_id);
+        const index = this.findIndexById(_id);
         this.masters.splice(index, 1);
         this.dataTable();
       }
@@ -51,16 +51,21 @@ export class MasterSchedulesComponent implements OnInit {
   }
 
   newMasterDialog(data): void {
-    var config: any = { panelClass: 'new-master-dialog'};
+    let config: any = { panelClass: 'new-master-dialog' };
     if (data) {
       config.data = data;
     }
-    let dialog = this.dialog.open(NewMasterComponent, config);
+    const dialog = this.dialog.open(NewMasterComponent, config);
 
     dialog.afterClosed().subscribe(data => {
       if (data) {
-        var index = this.findIndexById(data.master._id);
-        this.masters.splice(index, 1, data.master);
+        const index = this.findIndexById(data.master._id);
+        if (index < 0) {
+          this.masters.push(data.master);
+        } else {
+          this.masters.splice(index, 1, data.master);
+        }
+
         this.dataTable();
       }
     });
@@ -70,7 +75,7 @@ export class MasterSchedulesComponent implements OnInit {
     this.mastersDataSource = new MatTableDataSource(this.masters);
     this.mastersDataSource.paginator = this.paginator;
   }
-  
+
   findIndexById(_id) {
     return this.masters.findIndex((item) => {
       return item._id === _id;
@@ -78,7 +83,6 @@ export class MasterSchedulesComponent implements OnInit {
   }
 
   viewDetailedBill(bill: MasterBill) {
-    console.log(bill);
     this.selectedBill = bill;
   }
 }

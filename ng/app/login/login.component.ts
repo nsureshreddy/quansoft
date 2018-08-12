@@ -11,7 +11,7 @@ import { User } from '../app-models/user';
 })
 
 export class LoginComponent {
-  showSignup: boolean = false;
+  showSignup = false;
   thankNote: boolean;
   user: User;
   loginError: Boolean;
@@ -24,7 +24,7 @@ export class LoginComponent {
     if (!form.valid) {
       return;
     }
-    this.http.post('/api/signin',this.user).subscribe(resp => {
+    this.http.post('/api/signin', this.user).subscribe(resp => {
       localStorage.setItem('session-token', resp['token']);
       this.router.navigate(['dashboard/proposal']);
     }, err => {
@@ -35,7 +35,7 @@ export class LoginComponent {
 
   signup(form: NgForm) {
     this.user.status = 'NEW';
-    this.http.post('/api/signup',this.user).subscribe(resp => {
+    this.http.post('/api/signup', this.user).subscribe(resp => {
       this.thankNote = true;
     }, err => {
       this.loginError = true;

@@ -1,0 +1,126 @@
+<mat-card class="padding">
+  <div class="project-signup mat-elevation-z8">
+    <h3 class="header">New Project</h3>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+      <mat-step [stepControl]="orgForm">
+        <ng-template matStepLabel>Organization Details</ng-template>
+        <form [formGroup]="orgForm">
+          <mat-form-field>
+            <input matInput placeholder="Project Name" formControlName="name" required>
+            <mat-error *ngIf="orgForm.controls['name'].errors?.required">
+              Project Name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Client Name" formControlName="client" required>
+            <mat-error *ngIf="orgForm.controls['client'].errors?.required">
+              Name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email" required>
+            <mat-error *ngIf="orgForm.controls['email'].errors?.required">
+              Email is
+              <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="orgForm.controls['email'].errors?.email">
+              Invalid Email
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Location" formControlName="location">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Region" formControlName="region">
+          </mat-form-field>
+          <div>
+            <button mat-raised-button matStepperNext color="primary">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="orderForm">
+        <ng-template matStepLabel>Project Details</ng-template>
+        <form [formGroup]="orderForm">
+          <mat-form-field>
+            <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Site Area" formControlName="siteArea">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Builtup Area" formControlName="builtupArea">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="No. Of Buildings" formControlName="numberOfBuildings">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="No. Of Floors" formControlName="numberOfFloors">
+          </mat-form-field>
+          <div>
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button matStepperNext class="m-l" color="primary">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="scopeForm">
+        <ng-template matStepLabel>Scope Of Work</ng-template>
+        <form [formGroup]="scopeForm">
+          <mat-form-field>
+            <mat-select placeholder="Type" formControlName="type">
+              <mat-option value="Residential">Residential</mat-option>
+              <mat-option value="Commercial">Commercial</mat-option>
+              <mat-option value="Institutional">Institutional</mat-option>
+              <mat-option value="Hospitality">Hospitality</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select [disabled]="true" placeholder="Stage" formControlName="stage">
+              <mat-option value="New">New</mat-option>
+              <mat-option value="Proposal">Proposal</mat-option>
+              <mat-option value="Execution">Execution</mat-option>
+              <mat-option value="Completed">Completed</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Scope" name="scope" [formControl]="scope" multiple>
+              <mat-select-trigger>
+                {{scope.value ? scope.value[0] : ''}}
+                <span *ngIf="scope.value?.length > 1">
+                  (+{{scope.value.length - 1}} others)
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let scopeItem of scopeList" [value]="scopeItem">{{scopeItem}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="FSI" formControlName="fsi">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Participants" [formControl]="participants" multiple>
+              <mat-select-trigger>
+                {{participants.value ? participants.value[0] : ''}}
+                <span *ngIf="participants.value?.length > 1">
+                  (+{{participants.value.length - 1}} others)
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let participant of participantsList" [value]="participant">{{participant}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button class="m-l" color="primary" (click)="signup()">Save</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</mat-card>

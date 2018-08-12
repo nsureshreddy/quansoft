@@ -16,13 +16,13 @@ export class VendorsService {
   getVendors() {
     return this.http.get('/api/vendor');
   }
-  
+
   submitTendor(vendors: string[], jobId) {
-    return this.http.post('/api/submit-tendor',{ vendors: vendors, jobId: jobId });
+    return this.http.post('/api/submit-tendor', { vendors: vendors, jobId: jobId });
   }
 
-  submitQuotation(estimates: CostEstimates, jobId: string) {
-    return this.http.post('/api/submit-quote', {estimates: estimates, jobId: jobId});
+  submitQuotation(estimates: CostEstimates, jobId: number) {
+    return this.http.post('/api/submit-quote', { estimates: estimates, jobId: jobId });
   }
 
   setSelectedVendors(list: Vendor[]) {

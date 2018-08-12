@@ -17,13 +17,14 @@ export class TendersComponent implements OnInit {
   constructor(private router: Router) {
     router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        let index = this.tabs.findIndex(i => {
+        const index = this.tabs.findIndex(i => {
           return val.urlAfterRedirects.indexOf(i.link) === 0;
         });
         this.activeIndex = index;
       }
     });
   }
+
   ngOnInit() {
   }
 }

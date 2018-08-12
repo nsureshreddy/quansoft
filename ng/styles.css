@@ -63,6 +63,10 @@ h1, h2, h3, h4, h5, h6 {
 .text-left {
   text-align: left;
 }
+.text-capitalize {
+  text-transform: capitalize;
+}
+
 ._500 {
   font-weight: 500;
 }
@@ -88,6 +92,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .material-icons.link {
   cursor: pointer;
+}
+.margin {
+  margin: 16px;
 }
 .material-icons.menu-link {
   vertical-align: middle;
@@ -136,7 +143,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .n-m {
-  margin: 0;
+  margin: 0!important;
 }
 .n-m-t {
   margin-top: 0;
@@ -171,7 +178,7 @@ li {
 }
 
 .padding {
-  padding: 1rem!important;
+  padding: .875rem!important;
 }
 
 .mat-form-field-wrapper {
@@ -296,7 +303,7 @@ li {
 
 .new-master-dialog .mat-dialog-container {
   padding: 0;
-  width: 85vw;
+  width: 90vw!important;
   min-height: 540px;
 }
 .rate-input-dialog .mat-dialog-content {
@@ -308,9 +315,13 @@ li {
   min-height: 540px;
   overflow-x: hidden;
 }
+.colHeader {
+  font-size: 14px!important;
+}
 .quantity-input-dialog .mat-dialog-container {
   padding: 0;
-  width: 60vw;
+  max-width: 90vw!important;
+  width: 90vw;
   min-height: 480px;
 }
 .new-resource-dialog .mat-dialog-container {
@@ -353,6 +364,7 @@ li {
 .app-toolbar .designation {
   display: block;
   line-height: 12px;
+  font-size: 12px;
   text-transform: capitalize;
 }
 
@@ -409,4 +421,9 @@ a {
 
 .inline-block {
   display: inline-block;
+}
+
+.builder-comments {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
 }

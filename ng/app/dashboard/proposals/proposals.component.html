@@ -49,12 +49,10 @@
                   <i class="material-icons menu-link">insert_drive_file</i>
                   View Proposal
               </button>
-              <button routerLink="../proposal/{{element.jobId}}/assign-users" mat-menu-item>
-                  <i class="material-icons menu-link">assignment_ind</i>
-                  Assign Users
-              </button>
           </mat-menu>
+          <i class="material-icons link" routerLink="../project/edit/{{element.jobId}}">edit</i>
         </mat-cell>
+
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

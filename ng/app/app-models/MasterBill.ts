@@ -1,4 +1,4 @@
-import { MasterScheduleActivity } from "./MasterScheduleActivity";
+import { MasterScheduleActivity } from './MasterScheduleActivity';
 
 export class MasterBill {
   _id: string;
@@ -8,7 +8,9 @@ export class MasterBill {
 
   constructor(fields: any) {
     for (const f in fields) {
-      this[f] = fields[f];
+      if (fields[f]) {
+        this[f] = fields[f];
+      }
     }
   }
 }

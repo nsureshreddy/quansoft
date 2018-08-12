@@ -37,12 +37,18 @@ var masterScheduleActivitySchema = Schema({
   rate: {
     type: Number
   },
+  amount: {
+    type: Number
+  },
   rateComponents: [{
     type: rateComponentSchema,
     ref: 'RateComponent'
   }],
   profitMargin: {
     type: Number
+  },
+  quantityItems: {
+    type: Object
   }
 });
 

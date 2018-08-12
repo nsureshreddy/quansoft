@@ -28,9 +28,9 @@ export class TendersListComponent implements OnInit {
 
   ngOnInit() {
     this.proposalService.getProposals().subscribe((resp: any) => {
-      if (resp && resp.constructor === Array && resp.length>0) {
-        this.proposals = resp.filter((item)=>{
-          return item.costEstimates && item.costEstimates.bills && item.costEstimates.bills.length>0;
+      if (resp && resp.constructor === Array && resp.length > 0) {
+        this.proposals = resp.filter((item) => {
+          return item.costEstimates && item.costEstimates.bills && item.costEstimates.bills.length > 0;
         });
         this.decorateTable();
       }

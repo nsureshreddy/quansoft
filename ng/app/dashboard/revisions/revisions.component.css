@@ -1,0 +1,15 @@
+.revisions-table table {
+    width: 100%;
+  }
+  .revisions-table .mat-header-row {
+    height: 2rem;
+  }
+  .revisions-table .mat-row {
+    height: 2.5rem;
+  }
+  .revisions-table .mat-header-row th {
+    font-size: .875rem;
+  }
+  .revisions-table .mat-header-row th .mat-checkbox-frame {
+    border-color: #fff!important;
+  }

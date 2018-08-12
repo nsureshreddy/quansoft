@@ -20,7 +20,7 @@ export class QuotationsComponent implements OnInit {
   selection = new SelectionModel<Vendor>(true, []);
 
   constructor(private proposalService: ProposalService,
-  private vendorsService: VendorsService, private router: Router) { }
+    private vendorsService: VendorsService, private router: Router) { }
   quotations: any = [];
   project: Project;
 
@@ -29,22 +29,23 @@ export class QuotationsComponent implements OnInit {
   }
 
   getQuotations() {
-    this.proposalService.getProposals().subscribe((resp:any)=> {
-      var quotation: any = {};
+    this.proposalService.getProposals().subscribe((resp: any) => {
       resp.forEach((proposal) => {
         if (proposal.quotations && proposal.quotations.length > 0) {
-          proposal.quotations.forEach((q)=>{
+          proposal.quotations.forEach((q) => {
             q.project = proposal.client;
             q.jobId = proposal.jobId;
             q.status = 'New';
-            q.totalCost = 0;     
-            var bills = q.bills;
-            bills.forEach((bill)=>{
-              var activities = bill.activities;
-              activities && activities.forEach((activity)=>{
-                q.totalCost+=activity.quantity*activity.rate;
-              });
-            });         
+            q.totalCost = 0;
+            const bills = q.bills;
+            bills.forEach((bill) => {
+              const activities = bill.activities;
+              if (activities) {
+                activities.forEach((activity) => {
+                  q.totalCost += activity.quantity * activity.rate;
+                });
+              }
+            });
             this.quotations.push(q);
           });
         }
@@ -74,8 +75,8 @@ export class QuotationsComponent implements OnInit {
 
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   decorateTable() {

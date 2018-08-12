@@ -22,6 +22,7 @@ import { CostEstimatesComponent } from './cost-estimates/cost-estimates.componen
 import { QuantityInputComponent } from './cost-estimates/quantity-input/quantity-input.component';
 
 import { ProjectDetailComponent } from './dashboard/project-detail/project-detail.component';
+import { ProjectEditComponent } from './dashboard/project-edit/project-edit.component';
 import { PriceScheduleComponent } from './dashboard/price-schedule/price-schedule.component';
 import { PaymentTermsComponent } from './dashboard/payment-terms/payment-terms.component';
 import { TermsConditionsComponent } from './dashboard/terms-conditions/terms-conditions.component';
@@ -39,7 +40,7 @@ import { AppPipesModule } from './app-pipes/app-pipes.module';
 
 import { ProposalService } from './services/proposal.service';
 import { MastersService } from './services/masters.service';
-import { AlwaysAuthGuard } from './services/authguard';
+import { AlwaysAuthGuard } from './services/auth.guard';
 import { LoginService } from './services/login.service';
 import { VendorsService } from './services/vendors.service';
 import { VendorsComponent } from './vendors/vendors.component';
@@ -56,10 +57,18 @@ import { SendQuoteComponent } from './dashboard/tenders/send-quote/send-quote.co
 import { UserService } from './services/user.service';
 import { ViewQuoteComponent } from './vendors/view-quotation/view-quote.component';
 import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.component';
+import { UsersComponent } from './dashboard/users/users.component';
+import { DeleteDialog } from './dialogs/delete-dialog.component';
+import { AdminGuard } from './services/admin.guard';
+import { SessionResolver } from './services/session.resolver';
+import { ProfileDialog } from './dialogs/profile-dialog';
+import { RevisionsComponent } from './dashboard/revisions/revisions.component';
+import { RevisionComponent } from './dashboard/revision/revision.component';
+import { BuilderComments } from './dialogs/builder-comments.component';
 
 @NgModule({
-  
-  imports:      [ 
+
+  imports: [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -69,7 +78,7 @@ import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.
     routing
   ],
 
-  declarations: [ 
+  declarations: [
     AppComponent,
     AppLayoutComponent,
     SiteLayoutComponent,
@@ -94,6 +103,7 @@ import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.
     CostEstimatesListComponent,
     CostEstimatesProposalComponent,
     ProjectDetailComponent,
+    ProjectEditComponent,
     QuantityInputComponent,
     RateInputComponent,
     TermsConditionsComponent,
@@ -108,7 +118,13 @@ import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.
     TendersListComponent,
     SendQuoteComponent,
     ViewQuoteComponent,
-    CompareQuotesComponent
+    CompareQuotesComponent,
+    UsersComponent,
+    DeleteDialog,
+    ProfileDialog,
+    BuilderComments,
+    RevisionsComponent,
+    RevisionComponent
   ],
   providers: [
     ProposalService,
@@ -117,14 +133,19 @@ import { CompareQuotesComponent } from './vendors/compare-quotes/compare-quotes.
     LoginService,
     UserService,
     AlwaysAuthGuard,
-    DynamicDatabase
+    AdminGuard,
+    DynamicDatabase,
+    SessionResolver
   ],
   entryComponents: [
     NewMasterComponent,
     RateInputComponent,
     QuantityInputComponent,
-    NewVendorComponent
+    NewVendorComponent,
+    DeleteDialog,
+    ProfileDialog,
+    BuilderComments
   ],
-  bootstrap:    [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

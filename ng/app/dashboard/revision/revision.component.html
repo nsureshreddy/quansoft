@@ -1,0 +1,60 @@
+<div>
+  <h3 class="header p-l-1">Cost Estimates /
+    <span>{{proposal?.name}}</span>
+  </h3>
+  <mat-grid-list cols="12" rowHeight="30px">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="columnBackground"
+      [style.color]="columnTextColor">
+      {{tile.text}}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <ng-container *ngIf="selectedBills.length>0">
+    <ng-container *ngIf="!editable">
+      <mat-grid-list cols="12" rowHeight="100px" *ngFor="let bill of selectedBills">
+        <ng-container *ngFor="let activity of bill.activities">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.code}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.shortDescription}}</mat-grid-tile>
+          <mat-grid-tile class="activity-description" [colspan]="2" [rowspan]="1">{{activity.description}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.uom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.quantity}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.rate}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.amount}}</mat-grid-tile>
+        </ng-container>
+      </mat-grid-list>
+    </ng-container>
+    <ng-container *ngIf="editable">
+      <mat-grid-list cols="12" rowHeight="100px" *ngFor="let bill of selectedBills">
+        <ng-container *ngFor="let activity of bill.activities">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.code}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">{{activity.shortDescription}}</mat-grid-tile>
+          <mat-grid-tile class="activity-description" [colspan]="2" [rowspan]="1">{{activity.description}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">{{activity.uom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <mat-form-field style="width: 60px;">
+              <input matInput (keyup)="getTotal(activity)" placeholder="Qty." [(ngModel)]="activity.quantity">
+              <mat-icon *ngIf="!userService.userIs(['builder'])" class="link" (click)="getQuantity(selectedMaster, activity)" matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <mat-form-field style="width: 100px;">
+              <span matPrefix>&#8377;</span>
+              <input matInput placeholder="Rate" name="rate" [(ngModel)]="activity.rate">
+              <span matSuffix>.00</span>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <mat-form-field style="width: 100px;">
+              <span matPrefix>&#8377;</span>
+              <input matInput [(ngModel)]="activity.amount" placeholder="Amount">
+              <span matSuffix>.00</span>
+            </mat-form-field>
+          </mat-grid-tile>
+          
+        </ng-container>
+      </mat-grid-list>
+      <div class="m-r m-b pull-right">
+        <button class="m-r" mat-raised-button color="primary" (click)="save(true)">Submit Revision</button>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

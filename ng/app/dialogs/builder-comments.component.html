@@ -1,0 +1,10 @@
+<h1 class="n-m" mat-dialog-title>
+  {{approved? 'Approve': 'Reject'}} Cost Estimates</h1>
+<div mat-dialog-content>
+  <p>Comments</p>
+  <textarea class="builder-comments" [(ngModel)]="comments" cols="57" rows="5" matInput></textarea>
+</div>
+<div mat-dialog-actions class="pull-right">
+  <button class="mat-raised-button" (click)="close()">Cancel</button>
+  <button class="mat-raised-button mat-primary" (click)="saveComments()" cdkFocusInitial>Ok</button>
+</div>

@@ -14,29 +14,27 @@ export class CompareQuotesComponent implements OnInit {
   quotations: any;
 
   constructor(private proposalService: ProposalService,
-  private vendorsService: VendorsService, private route: ActivatedRoute) { }
-  
-  columnBackground: string = '#3f51b5';
-  columnTextColor: string = '#fff';
+    private vendorsService: VendorsService, private route: ActivatedRoute) { }
 
-  
+  columnBackground = '#3f51b5';
+  columnTextColor = '#fff';
+
   tiles = [
-    {text: 'Cost Estimates', cols: 4, rows: 1}
+    { text: 'Cost Estimates', cols: 4, rows: 1 }
   ];
 
   ngOnInit() {
-    let jobId = +this.route.snapshot.paramMap.get('jobId');
+    const jobId = +this.route.snapshot.paramMap.get('jobId');
     this.getProposal(jobId);
 
     this.quotations = this.vendorsService.getSelectedQuotes();
     this.quotations.forEach(element => {
-      this.tiles.push({text: element.vendor, cols:4, rows: 1});
+      this.tiles.push({ text: element.vendor, cols: 4, rows: 1 });
     });
-    console.log(this.quotations);
   }
 
   getProposal(id) {
-    this.proposalService.getProject(id).subscribe((project: Project)=>{
+    this.proposalService.getProject(id).subscribe((project: Project) => {
       this.project = project;
     });
   }
